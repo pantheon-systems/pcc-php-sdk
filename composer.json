@@ -1,0 +1,16 @@
+{
+  "name": "digitalpolygon/pcc-php-sdk",
+  "description": "SDK Library for PCC Integration.",
+  "type": "library",
+  "require": {
+    "php": ">=8"
+  },
+  "require-dev": {
+    "guzzlehttp/guzzle": "^7.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "PccPhpSdk\\": "src"
+    }
+  }
+}
