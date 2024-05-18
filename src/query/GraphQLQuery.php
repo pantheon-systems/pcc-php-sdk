@@ -5,9 +5,9 @@ namespace PccPhpSdk\query;
 class GraphQLQuery implements QueryInterface {
 
   private string $query;
-  private array $variables;
+  private \ArrayObject $variables;
 
-  public function __construct(string $query, array $variables = []) {
+  public function __construct(string $query, \ArrayObject $variables = new \ArrayObject()) {
     $this->query = $query;
     $this->variables = $variables;
   }

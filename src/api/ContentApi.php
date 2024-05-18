@@ -14,10 +14,16 @@ class ContentApi {
   }
 
   public function getAllArticles() {
-    $query = new GraphQLQuery(
-      '{\\n    articles {\\n        id\\n        title\\n    }\\n}',
-      []
-    );
-    return $this->pantheonClient->executeQuery($query);
+    $query = <<<'GRAPHQL'
+    query{
+      articles {
+        id
+        title
+      }
+    }
+    GRAPHQL;
+
+    $graphQLQuery = new GraphQLQuery($query);
+    return $this->pantheonClient->executeQuery($graphQLQuery);
   }
 }

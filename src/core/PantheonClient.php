@@ -29,11 +29,12 @@ class PantheonClient {
   }
 
   public function sendRequest($body) {
+//    $body = '{"query":"{\\n  articles {\\n        id\\n        title\\n    }\\n}","variables":{}}';
     $client = new Client();
     $headers = $this->getHeaders();
     $request = new Request('POST', $this->getUrl(), $headers, $body);
     $response = $client->sendAsync($request)->wait();
-    return $response->getBody();
+    return $response->getBody()->getContents();
   }
 
   private function getHeaders() {
