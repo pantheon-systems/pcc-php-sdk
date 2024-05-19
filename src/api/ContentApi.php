@@ -2,18 +2,20 @@
 
 namespace PccPhpSdk\api;
 
-use PccPhpSdk\core\PantheonClient;
 use PccPhpSdk\query\GraphQLQuery;
 
-class ContentApi {
+/**
+ * Content API to get articles.
+ */
+class ContentApi extends PccApi {
 
-  private PantheonClient $pantheonClient;
-
-  public function __construct(PantheonClient $pantheonClient) {
-    $this->pantheonClient = $pantheonClient;
-  }
-
-  public function getAllArticles() {
+  /**
+   * Get all articles.
+   *
+   * @return mixed
+   *   Returns articles list as JSON.
+   */
+  public function getAllArticles(): mixed {
     $query = <<<'GRAPHQL'
     query{
       articles {
@@ -24,6 +26,6 @@ class ContentApi {
     GRAPHQL;
 
     $graphQLQuery = new GraphQLQuery($query);
-    return $this->pantheonClient->executeQuery($graphQLQuery);
+    return $this->pccClient->executeQuery($graphQLQuery);
   }
 }

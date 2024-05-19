@@ -1,19 +1,19 @@
 # PCC PHP SDK | PCC Integration
 
-### Create Panthoen Client
+### Create Pcc Client
 
 ```php
-    $pantheonClientConfig = new PantheonClientConfig(
+    $pccClientConfig = new PccClientConfig(
           '--site-id-here--',
           '--site-token-here--'
         );
-    $pantheonClient = new PantheonClient($pantheonClientConfig);
+    $pccClient = new PccClient($pccClientConfig);
 ```
 
 
 ### Getting all articles
 
 ```php
-    $contentApi = new ContentApi($pantheonClient);
+    $contentApi = new ContentApi($pccClient);
     $content = $contentApi->getAllArticles();
 ```

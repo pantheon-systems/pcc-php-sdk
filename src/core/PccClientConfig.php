@@ -3,10 +3,13 @@
 namespace PccPhpSdk\core;
 
 /**
- * Pantheon Client Configurations.
+ * Pcc Client Configurations.
  */
-class PantheonClientConfig {
+class PccClientConfig {
 
+  /**
+   * Default PCC Host URL.
+   */
   const PCC_HOST_DEFAULT = 'https://gql.prod.pcc.pantheon.io/';
 
   /**
@@ -14,21 +17,21 @@ class PantheonClientConfig {
    *
    * @var string
    */
-  private $pccHost;
+  private string $pccHost;
 
   /**
    * The site ID.
    *
    * @var string
    */
-  private $siteId;
+  private string $siteId;
 
   /**
    * The site token.
    *
    * @var string
    */
-  private $siteToken;
+  private string $siteToken;
 
   /**
    * Constructor
@@ -43,17 +46,35 @@ class PantheonClientConfig {
   public function __construct(string $siteId, string $siteToken, string $pccHost = null) {
     $this->siteId = $siteId;
     $this->siteToken = $siteToken;
-    $this->pccHost = $pccHost;
+    $this->pccHost = $pccHost ?? self::PCC_HOST_DEFAULT;
   }
 
+  /**
+   * Get Pcc Host
+   *
+   * @return string
+   *   PCC Host URL string.
+   */
   public function getPccHost() : string {
-    return $this->pccHost ?? self::PCC_HOST_DEFAULT;
+    return $this->pccHost;
   }
 
+  /**
+   * Get Site ID.
+   *
+   * @return string
+   *   PCC Site ID.
+   */
   public function getSiteId() : string {
     return $this->siteId;
   }
 
+  /**
+   * Get Site Token.
+   *
+   * @return string
+   *   PCC Site Token
+   */
   public function getSiteToken() : string {
     return $this->siteToken;
   }

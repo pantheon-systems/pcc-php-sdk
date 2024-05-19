@@ -2,17 +2,24 @@
 
 namespace PccPhpSdk\api;
 
-use PccPhpSdk\core\PantheonClient;
 use PccPhpSdk\query\GraphQLQuery;
 
-class SiteApi {
-  private PantheonClient $pantheonClient;
+/**
+ * Site API to get site.
+ */
+class SiteApi extends PccApi {
 
-  public function __construct(PantheonClient $pantheonClient) {
-    $this->pantheonClient = $pantheonClient;
-  }
 
-  public function getSite($siteId) {
+  /**
+   * Get site.
+   *
+   * @param string $siteId
+   *   Site ID string.
+   *
+   * @return mixed
+   *   Returns site information as JSON.
+   */
+  public function getSite(string $siteId): mixed {
     $query = <<<'GRAPHQL'
     query GetSite($siteId: String!) {
       site(id: $siteId) {
@@ -24,6 +31,6 @@ class SiteApi {
     $variables = new \ArrayObject(['siteId' => $siteId]);
 
     $graphQLQuery = new GraphQLQuery($query, $variables);
-    return $this->pantheonClient->executeQuery($graphQLQuery);
+    return $this->pccClient->executeQuery($graphQLQuery);
   }
 }
