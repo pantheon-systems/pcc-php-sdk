@@ -4,6 +4,7 @@ namespace PccPhpSdk\core;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use PccPhpSdk\Exception\PccClientException;
 use PccPhpSdk\query\QueryInterface;
 
 /**
@@ -38,6 +39,7 @@ class PccClient {
    *
    * @return mixed
    *   Response content string.
+   * @throws PccClientException
    */
   public function executeQuery(QueryInterface $query): mixed {
     return $this->sendRequest($query->build());
@@ -51,12 +53,17 @@ class PccClient {
    *
    * @return mixed
    *   Response content string.
+   * @throws PccClientException
    */
   public function sendRequest(bool|string $body): mixed {
     $client = new Client();
     $headers = $this->getHeaders();
     $request = new Request('POST', $this->getUrl(), $headers, $body);
-    $response = $client->sendAsync($request)->wait();
+    try {
+      $response = $client->sendAsync($request)->wait();
+    } catch (\Exception $e) {
+      throw new PccClientException($e->getMessage(), $e->getCode(), null, $e);
+    }
     return $response->getBody()->getContents();
   }
 

@@ -1,6 +1,6 @@
 # PCC PHP SDK | PCC Integration
 
-### Create Pcc Client
+## Create Pcc Client
 
 ```php
     $pccClientConfig = new PccClientConfig(
@@ -10,8 +10,7 @@
     $pccClient = new PccClient($pccClientConfig);
 ```
 
-
-### Getting all articles
+## Getting all articles
 
 ```php
     $contentApi = new ContentApi($pccClient);

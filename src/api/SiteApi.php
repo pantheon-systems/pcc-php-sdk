@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\Exception\PccClientException;
 use PccPhpSdk\query\GraphQLQuery;
 
 /**
@@ -18,6 +19,7 @@ class SiteApi extends PccApi {
    *
    * @return mixed
    *   Returns site information as JSON.
+   * @throws PccClientException
    */
   public function getSite(string $siteId): mixed {
     $query = <<<'GRAPHQL'

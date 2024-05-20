@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\Exception\PccClientException;
 use PccPhpSdk\query\GraphQLQuery;
 
 /**
@@ -14,6 +15,7 @@ class ContentApi extends PccApi {
    *
    * @return mixed
    *   Returns articles list as JSON.
+   * @throws PccClientException
    */
   public function getAllArticles(): mixed {
     $query = <<<'GRAPHQL'
