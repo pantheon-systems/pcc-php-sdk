@@ -20,9 +20,13 @@ class ContentApi extends PccApi {
   public function getAllArticles(): mixed {
     $query = <<<'GRAPHQL'
     query{
-      articles {
+      articles(contentType: TREE_PANTHEON_V2) {
         id
         title
+        content
+        snippet
+        publishedDate
+        updatedAt
       }
     }
     GRAPHQL;
