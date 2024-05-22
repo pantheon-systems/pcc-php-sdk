@@ -12,4 +12,5 @@ interface QueryInterface {
    *   JSON encoded query string.
    */
   public function build(): string;
+
 }

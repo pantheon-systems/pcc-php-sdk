@@ -32,14 +32,15 @@ class PccClient {
   }
 
   /**
-   * Execute Query
+   * Execute Query.
    *
-   * @param QueryInterface $query
+   * @param \PccPhpSdk\query\QueryInterface $query
    *   Query Interface object.
    *
    * @return mixed
    *   Response content string.
-   * @throws PccClientException
+   *
+   * @throws \PccPhpSdk\Exception\PccClientException
    */
   public function executeQuery(QueryInterface $query): mixed {
     return $this->sendRequest($query->build());
@@ -53,7 +54,8 @@ class PccClient {
    *
    * @return mixed
    *   Response content string.
-   * @throws PccClientException
+   *
+   * @throws \PccPhpSdk\Exception\PccClientException
    */
   public function sendRequest(bool|string $body): mixed {
     $client = new Client();
@@ -61,8 +63,9 @@ class PccClient {
     $request = new Request('POST', $this->getUrl(), $headers, $body);
     try {
       $response = $client->sendAsync($request)->wait();
-    } catch (\Exception $e) {
-      throw new PccClientException($e->getMessage(), $e->getCode(), null, $e);
+    }
+    catch (\Exception $e) {
+      throw new PccClientException($e->getMessage(), $request, NULL, $e);
     }
     return $response->getBody()->getContents();
   }
@@ -89,4 +92,5 @@ class PccClient {
   private function getUrl(): string {
     return $this->clientConfig->getPccHost() . 'sites/' . $this->clientConfig->getSiteId() . '/query';
   }
+
 }
