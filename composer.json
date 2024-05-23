@@ -7,7 +7,8 @@
     "php": ">=8",
     "guzzlehttp/guzzle": "^7.8",
     "guzzlehttp/psr7": "^2.6",
-    "guzzlehttp/promises": "^2.0"
+    "guzzlehttp/promises": "^2.0",
+    "cfpinto/graphql": "dev-master"
   },
   "autoload": {
     "psr-4": {

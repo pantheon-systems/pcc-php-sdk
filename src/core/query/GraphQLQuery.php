@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\query;
+namespace PccPhpSdk\core\query;
 
 /**
  * GraphQL Query class.
@@ -29,7 +29,7 @@ class GraphQLQuery implements QueryInterface {
   /**
    * {@inheritDoc}
    */
-  public function build(): string {
+  public function toRequestBody(): string {
     $data = [
       'query' => $this->query,
       'variables' => $this->variables,

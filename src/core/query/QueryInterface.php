@@ -1,6 +1,8 @@
 <?php
 
-namespace PccPhpSdk\query;
+namespace PccPhpSdk\core\query;
+
+use PccPhpSdk\Enum\EntityType;
 
 /**
  * Query Interface to build JSON encoded query string for the payload of API request.
@@ -8,9 +10,11 @@ namespace PccPhpSdk\query;
 interface QueryInterface {
 
   /**
+   * Converts Query to executable string.
+   *
    * @return string
    *   JSON encoded query string.
    */
-  public function build(): string;
+  public function toRequestBody(): string;
 
 }
