@@ -5,10 +5,13 @@ namespace PccPhpSdk\core\Entity\Loader;
 use PccPhpSdk\core\Entity\Article;
 use PccPhpSdk\core\Entity\ArticlesList;
 use PccPhpSdk\core\PccClient;
-use PccPhpSdk\core\Query\Builder\ArticleQueryBuilder;
-use PccPhpSdk\core\Query\Builder\ArticlesListQueryBuilder;
+use PccPhpSdk\core\Query\Builder\Article\ArticlesListQueryBuilder;
+use PccPhpSdk\core\Query\Builder\Article\ArticleQueryBuilder;
 use PccPhpSdk\core\Query\QueryInterface;
 
+/**
+ * Article Loader.
+ */
 class ArticleLoader implements ArticleLoaderInterface {
 
   /**
@@ -28,6 +31,9 @@ class ArticleLoader implements ArticleLoaderInterface {
     $this->pccClient = $pccClient;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function loadById(string $id): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getDefaultFields());
@@ -40,6 +46,9 @@ class ArticleLoader implements ArticleLoaderInterface {
     return !empty($response) ? $this->toArticle($response) : null;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function loadBySlug(string $slug): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getDefaultFields());
@@ -52,6 +61,9 @@ class ArticleLoader implements ArticleLoaderInterface {
     return !empty($response) ? $this->toArticle($response) : null;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function loadAll(): ArticlesList {
     $queryBuilder = new ArticlesListQueryBuilder();
     $queryBuilder->addFields($this->getDefaultFields());
@@ -62,6 +74,15 @@ class ArticleLoader implements ArticleLoaderInterface {
     return $this->toArticlesList($response);
   }
 
+  /**
+   * Send Request with query.
+   *
+   * @param QueryInterface $query
+   *   Query for the request body.
+   *
+   * @return array
+   *   Response data as array.
+   */
   private function sendRequest(QueryInterface $query): array {
     $response = $this->pccClient->executeQuery($query);
     $jsonResponse = json_decode($response, true);
@@ -72,15 +93,36 @@ class ArticleLoader implements ArticleLoaderInterface {
     return $result;
   }
 
+  /**
+   * Parse response to get ArticlesList.
+   *
+   * @param array $data
+   *   Response data.
+   *
+   * @return ArticlesList
+   *   ArticlesList entity.
+   */
   private function toArticlesList(array $data): ArticlesList {
     $articlesList = new ArticlesList();
     foreach ($data as $article) {
-      $articlesList->addArticle($this->toArticle($article));
+      $articleEntity = $this->toArticle($article);
+      if ($articleEntity instanceof Article) {
+        $articlesList->addArticle($articleEntity);
+      }
     }
 
     return $articlesList;
   }
 
+  /**
+   * Parse response data to get Article.
+   *
+   * @param array $data
+   *   Response data.
+   *
+   * @return Article|null
+   *   Article entity or null.
+   */
   private function toArticle(array $data): ?Article {
     if (empty($data)) {
       return null;
@@ -95,7 +137,13 @@ class ArticleLoader implements ArticleLoaderInterface {
     return $article;
   }
 
-  private function getDefaultFields(): array {
+  /**
+   * Get default article fields.
+   *
+   * @return string[]
+   *   Array of fields.
+   */
+  protected function getDefaultFields(): array {
     return [
       'id',
       'slug',
@@ -108,4 +156,5 @@ class ArticleLoader implements ArticleLoaderInterface {
       'updatedAt',
     ];
   }
+
 }

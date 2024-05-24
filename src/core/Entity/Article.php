@@ -3,9 +3,9 @@
 namespace PccPhpSdk\core\Entity;
 
 /**
- * Class Article
+ * Article Entity.
  *
- * Response object containing Article data.
+ * Entity object containing Article data.
  */
 class Article {
 

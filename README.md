@@ -3,16 +3,16 @@
 ## Create Pcc Client
 
 ```php
-    $pccClientConfig = new PccClientConfig(
+    $pccClientConfig = new \PccPhpSdk\core\PccClientConfig(
           '--site-id-here--',
           '--site-token-here--'
         );
-    $pccClient = new PccClient($pccClientConfig);
+    $pccClient = new \PccPhpSdk\core\PccClient($pccClientConfig);
 ```
 
 ## Getting all articles
 
 ```php
-    $contentApi = new ContentApi($pccClient);
-    $content = $contentApi->getAllArticles();
+    $articlesApi = new \PccPhpSdk\api\ArticlesApi($pccClient);
+    $articles = $articlesApi->getAllArticles();
 ```

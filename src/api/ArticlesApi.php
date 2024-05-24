@@ -10,7 +10,7 @@ use PccPhpSdk\core\PccClient;
 use PccPhpSdk\core\Services\ArticlesManager;
 
 /**
- * Content API to get articles.
+ * Articles API to fetch articles.
  */
 class ArticlesApi extends PccApi {
 
