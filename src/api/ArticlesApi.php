@@ -2,109 +2,90 @@
 
 namespace PccPhpSdk\api;
 
-use PccPhpSdk\api\query\ArticleSearchArgs;
-use PccPhpSdk\api\response\PaginatedArticles;
+use PccPhpSdk\api\Query\ArticleSearchArgs;
+use PccPhpSdk\api\Response\Article;
+use PccPhpSdk\api\Response\Builder\ResponseBuilder;
+use PccPhpSdk\api\Response\PaginatedArticles;
 use PccPhpSdk\core\PccClient;
-use PccPhpSdk\core\query\GraphQLQuery;
-use PccPhpSdk\core\services\ArticlesManager;
+use PccPhpSdk\core\Services\ArticlesManager;
 
 /**
  * Content API to get articles.
  */
 class ArticlesApi extends PccApi {
 
+  /**
+   * Internal Articles Manager Service.
+   *
+   * @var ArticlesManager $articlesManager
+   */
   private ArticlesManager $articlesManager;
 
+  /**
+   * {@inheritDoc}
+   */
   public function __construct(PccClient $pccClient) {
     parent::__construct($pccClient);
     $this->articlesManager = new ArticlesManager($pccClient);
   }
 
   /**
-   * Get all articles.
+   * Get all articles (paginated).
    *
-   * @return mixed
-   *   Returns articles list as JSON.
+   * @return PaginatedArticles
+   *   Returns articles list wrapped as PaginatedArticles.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
   public function getAllArticles(): PaginatedArticles {
     $articles = $this->articlesManager->getArticles();
-    $paginatedArticles = new PaginatedArticles();
-    $paginatedArticles->articles = $articles;
-    $paginatedArticles->total = count($articles);
-    return $paginatedArticles;
-  }
-
-  public function getArticles(ArticleSearchArgs $args): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles($args);
-    $response = new PaginatedArticles();
-    $response->articles = $articles;
-    return $response;
+    return ResponseBuilder::toPaginatedArticles($articles);
   }
 
   /**
-   * Get all articles.
+   * Search Articles.
+   *
+   * @param ArticleSearchArgs $args
+   *   Search Criterion.
+   *
+   * @return PaginatedArticles
+   *   Returns articles list matching the search criterion as PaginatedArticles.
+   */
+  public function searchArticles(ArticleSearchArgs $args): PaginatedArticles {
+    $articles = $this->articlesManager->getArticles($args);
+    return ResponseBuilder::toPaginatedArticles($articles);
+  }
+
+  /**
+   * Get article by ID.
    *
    * @var string $id
-   *   The content id.
+   *   The article id.
    *
-   * @return mixed
-   *   Returns articles list as JSON.
+   * @return Article|null
+   *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id): mixed {
-    $query = <<<GRAPHQL
-    {
-      article (id: "$id" contentType: TREE_PANTHEON_V2) {
-        id
-        title
-        siteId
-        tags
-        content
-        snippet
-        publishedDate
-        updatedAt
-        slug
-      }
-    }
-    GRAPHQL;
-
-    $graphQLQuery = new GraphQLQuery($query);
-    return $this->pccClient->executeQuery($graphQLQuery);
+  public function getArticleById(string $id): ?Article {
+    $articleEntity = $this->articlesManager->getArticleById($id);
+    return ResponseBuilder::toArticleResponse($articleEntity);
   }
 
   /**
-   * Get all articles.
+   * Get article by slug.
    *
    * @var string $slug
-   *   The content slug.
+   *   The article slug.
    *
-   * @return mixed
-   *   Returns articles list as JSON.
+   * @return Article|null
+   *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleBySlug(string $slug): mixed {
-    $query = <<<GRAPHQL
-    {
-      article(slug: "$slug" contentType: TREE_PANTHEON_V2) {
-        id
-        title
-        siteId
-        tags
-        content
-        snippet
-        publishedDate
-        updatedAt
-        slug
-      }
-    }
-    GRAPHQL;
-
-    $graphQLQuery = new GraphQLQuery($query);
-    return $this->pccClient->executeQuery($graphQLQuery);
+  public function getArticleBySlug(string $slug): ?Article {
+    $articleEntity = $this->articlesManager->getArticleBySlug($slug);
+    return ResponseBuilder::toArticleResponse($articleEntity);
   }
 
 }

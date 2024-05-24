@@ -4,7 +4,7 @@ namespace PccPhpSdk\core;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use PccPhpSdk\core\query\QueryInterface;
+use PccPhpSdk\core\Query\QueryInterface;
 use PccPhpSdk\Exception\PccClientException;
 
 /**
@@ -34,7 +34,7 @@ class PccClient {
   /**
    * Execute Query.
    *
-   * @param \PccPhpSdk\core\query\QueryInterface $query
+   * @param \PccPhpSdk\core\Query\QueryInterface $query
    *   Query Interface object.
    *
    * @return mixed

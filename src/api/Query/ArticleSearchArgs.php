@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\api\query;
+namespace PccPhpSdk\api\Query;
 
 use PccPhpSdk\api\query\Enums\PublishStatus;
 

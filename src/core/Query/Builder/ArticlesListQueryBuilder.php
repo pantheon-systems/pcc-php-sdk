@@ -1,13 +1,13 @@
 <?php
 
-namespace PccPhpSdk\core\query\builder;
+namespace PccPhpSdk\core\Query\Builder;
 
 use GraphQL\Actions\Query;
-use PccPhpSdk\api\query\Enums\ContentType;
-use PccPhpSdk\core\query\GraphQLQuery;
-use PccPhpSdk\core\query\QueryInterface;
+use PccPhpSdk\api\Query\Enums\ContentType;
+use PccPhpSdk\core\Query\GraphQLQuery;
+use PccPhpSdk\core\Query\QueryInterface;
 
-class ArticlesQueryBuilder implements QueryBuilderInterface {
+class ArticlesListQueryBuilder implements QueryBuilderInterface {
 
   private array $fields = [];
 

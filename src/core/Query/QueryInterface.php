@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\core\query;
+namespace PccPhpSdk\core\Query;
 
 use PccPhpSdk\Enum\EntityType;
 
@@ -8,6 +8,8 @@ use PccPhpSdk\Enum\EntityType;
  * Query Interface to build JSON encoded query string for the payload of API request.
  */
 interface QueryInterface {
+
+  public function setVariables(array $variables);
 
   /**
    * Converts Query to executable string.

@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\api\response;
+namespace PccPhpSdk\api\Response;
 
 /**
  * Class PaginatedArticles

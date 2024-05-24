@@ -1,8 +1,8 @@
 <?php
 
-namespace PccPhpSdk\core\query\builder;
+namespace PccPhpSdk\core\Query\Builder;
 
-use PccPhpSdk\core\query\QueryInterface;
+use PccPhpSdk\core\Query\QueryInterface;
 
 /**
  *

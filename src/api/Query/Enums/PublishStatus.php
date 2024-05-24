@@ -1,7 +1,10 @@
 <?php
 
-namespace PccPhpSdk\api\query\Enums;
+namespace PccPhpSdk\api\Query\Enums;
 
+/**
+ * Supported Publish Status.
+ */
 enum PublishStatus: string {
   case PUBLISHED = 'published';
   case UNPUBLISHED = 'unpublished';

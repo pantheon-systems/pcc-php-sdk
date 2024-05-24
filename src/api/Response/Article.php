@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\api\response;
+namespace PccPhpSdk\api\Response;
 
 /**
  * Class Article
@@ -70,7 +70,7 @@ class Article {
   /**
    * Updated Date.
    *
-   * @var string $updatedDate
+   * @var string $updatedAt
    */
-  public string $updatedDate;
+  public string $updatedAt;
 }
