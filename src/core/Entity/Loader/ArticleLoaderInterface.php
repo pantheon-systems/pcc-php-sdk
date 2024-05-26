@@ -2,6 +2,8 @@
 
 namespace PccPhpSdk\core\Entity\Loader;
 
+use PccPhpSdk\api\Query\ArticleQueryArgs;
+use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\core\Entity\Article;
 use PccPhpSdk\core\Entity\ArticlesList;
 
@@ -19,7 +21,6 @@ interface ArticleLoaderInterface {
    * Slug identifier.
    */
   public const SLUG = 'slug';
-
 
   /**
    * Load Article by ID.
@@ -44,11 +45,16 @@ interface ArticleLoaderInterface {
   public function loadBySlug(string $slug): ?Article;
 
   /**
-   * Load All Articles.
+   * Load All Articles based on Query and Search args.
+   *
+   * @param ArticleQueryArgs|null $queryArgs
+   *   Article Query Args.
+   * @param ArticleSearchArgs|null $searchArgs
+   *   Article Search Args.
    *
    * @return ArticlesList
-   *   ArticlesList containing all articles.
+   *   ArticlesList containing all articles matching the criterion.
    */
-  public function loadAll(): ArticlesList;
+  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs): ArticlesList;
 
 }

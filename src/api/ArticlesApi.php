@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\api\Response\Article;
 use PccPhpSdk\api\Response\Builder\ResponseBuilder;
@@ -45,14 +46,16 @@ class ArticlesApi extends PccApi {
   /**
    * Search Articles.
    *
-   * @param ArticleSearchArgs $args
+   * @param ArticleQueryArgs $queryArgs
+   *   Query Args.
+   * @param ArticleSearchArgs $searchArgs
    *   Search Criterion.
    *
    * @return PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function searchArticles(ArticleSearchArgs $args): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles($args);
+  public function searchArticles(ArticleQueryArgs $queryArgs, ArticleSearchArgs $searchArgs): PaginatedArticles {
+    $articles = $this->articlesManager->getArticles(null, $searchArgs);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
 

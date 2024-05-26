@@ -51,10 +51,10 @@ class ResponseBuilder {
    */
   public static function toPaginatedArticles(ArticlesList $articlesList): PaginatedArticles {
     $response = new PaginatedArticles();
-    foreach ($articlesList as $articleEntity) {
+    foreach ($articlesList->articles as $articleEntity) {
       $response->articles[] = self::toArticleResponse($articleEntity);
     }
-    $response->total = count($articlesList);
+    $response->total = count($articlesList->articles);
     return $response;
   }
 

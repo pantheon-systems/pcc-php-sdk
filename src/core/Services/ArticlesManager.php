@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\core\Services;
 
+use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\core\Entity\Article;
 use PccPhpSdk\core\Entity\ArticlesList;
@@ -32,7 +33,7 @@ class ArticlesManager {
   }
 
   /**
-   * Get Articles based on Search Arguments.
+   * Get Articles based on Query & Search Arguments.
    *
    * @param ArticleSearchArgs|null $args
    *    Search Arguments.
@@ -40,8 +41,8 @@ class ArticlesManager {
    * @return ArticlesList
    *    ArticlesList containing matching articles.
    */
-  public function getArticles(?ArticleSearchArgs $args = null): ArticlesList {
-    return $this->articleLoader->loadAll();
+  public function getArticles(?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): ArticlesList {
+    return $this->articleLoader->loadAll(null, $searchArgs);
   }
 
   /**

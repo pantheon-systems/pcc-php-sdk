@@ -1,50 +1,54 @@
 <?php
 
-namespace PccPhpSdk\api\Query;
+namespace PccPhpSdk\core\Query\Builder\Article;
 
-use PccPhpSdk\api\query\Enums\PublishStatus;
+use PccPhpSdk\api\Query\Enums\PublishStatus;
 
 /**
- * Class ArticleSearchArgs
+ * Class ArticleFilterInput
  *
- * This class represents the arguments for searching articles.
+ * This class represents the filter inputs for querying articles.
  *
- * @package PccPhpSdk\api\Query
+ * @package PccPhpSdk\core\Query\Builder\Article
  */
-class ArticleSearchArgs {
+class ArticleFilterInput {
+
+  /**
+   * The constant representing the article filter input.
+   */
+  public const ARTICLE_FILTER_INPUT = 'ArticleFilterInput';
 
   /**
    * @var string $bodyContains
-   *
-   * The string to search for within the body of articles.
+   *   The string to search for within the body of articles.
    */
   public string $bodyContains;
 
   /**
-   * @var string $tagContains
-   *
    * The string to search for within the tags of articles.
+   *
+   * @var string $tagContains
    */
   public string $tagContains;
 
   /**
-   * @var string $titleContains
-   *
    * The string to search for within the title of articles.
+   *
+   * @var string $titleContains
    */
   public string $titleContains;
 
   /**
-   * @var PublishStatus $publishStatus
+   * The publishing status to filter articles by.
    *
-   * The publish status to filter articles by.
+   * @var PublishStatus $publishStatus
    */
   public PublishStatus $publishStatus;
 
   /**
-   * ArticleSearchArgs constructor.
+   * ArticleFilterInput constructor.
    *
-   * Initializes a new instance of the ArticleSearchArgs class.
+   * Initializes a new instance of the ArticleFilterInput class.
    *
    * @param string $bodyContains
    *   The string to search for within the body of articles.
@@ -143,3 +147,4 @@ class ArticleSearchArgs {
   }
 
 }
+

@@ -2,6 +2,8 @@
 
 namespace PccPhpSdk\core\Entity\Loader;
 
+use PccPhpSdk\api\Query\ArticleQueryArgs;
+use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\core\Entity\Article;
 use PccPhpSdk\core\Entity\ArticlesList;
 use PccPhpSdk\core\PccClient;
@@ -64,9 +66,12 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadAll(): ArticlesList {
+  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs): ArticlesList {
     $queryBuilder = new ArticlesListQueryBuilder();
     $queryBuilder->addFields($this->getDefaultFields());
+    if ($searchArgs) {
+      $queryBuilder->setFilter($searchArgs);
+    }
     $query = $queryBuilder->build();
 
     $response = $this->sendRequest($query);
@@ -130,8 +135,13 @@ class ArticleLoader implements ArticleLoaderInterface {
 
     $article = new Article();
     foreach ($this->getDefaultFields() as $field) {
-      if (isset($data[$field])) {
-        $article->{$field} = $data[$field];
+      switch ($field) {
+        case 'tags':
+          $article->{$field} = $data[$field] ?: [];
+          break;
+
+        default:
+          $article->{$field} = $data[$field] ?? '';
       }
     }
     return $article;
