@@ -1,6 +1,6 @@
 <?php
 
-namespace PccPhpSdk\query;
+namespace PccPhpSdk\core\Query;
 
 /**
  * GraphQL Query class.
@@ -29,7 +29,7 @@ class GraphQLQuery implements QueryInterface {
   /**
    * {@inheritDoc}
    */
-  public function build(): string {
+  public function toRequestBody(): string {
     $data = [
       'query' => $this->query,
       'variables' => $this->variables,
@@ -53,14 +53,14 @@ class GraphQLQuery implements QueryInterface {
   /**
    * Set variables array.
    *
-   * @param \ArrayObject $variables
-   *   Variables Array object.
+   * @param array $variables
+   *   Variables Array.
    *
    * @return void
    *   Returns void.
    */
-  public function setVariables(\ArrayObject $variables): void {
-    $this->variables = $variables;
+  public function setVariables(array $variables): void {
+    $this->variables = new \ArrayObject($variables);
   }
 
 }

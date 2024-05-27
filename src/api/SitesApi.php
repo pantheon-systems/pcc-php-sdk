@@ -2,14 +2,13 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\core\Query\GraphQLQuery;
 use PccPhpSdk\Exception\PccClientException;
-use PccPhpSdk\query\GraphQLQuery;
 
 /**
  * Site API to get site.
  */
-class SiteApi extends PccApi {
-
+class SitesApi extends PccApi {
 
   /**
    * Get site.
