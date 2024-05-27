@@ -72,6 +72,9 @@ class ArticleLoader implements ArticleLoaderInterface {
     if ($searchArgs) {
       $queryBuilder->setFilter($searchArgs);
     }
+    if ($queryArgs) {
+      $queryBuilder->setQueryArgs($queryArgs);
+    }
     $query = $queryBuilder->build();
 
     $response = $this->sendRequest($query);

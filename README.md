@@ -40,9 +40,6 @@ $paginatedArticles = $articlesApi->searchArticles(new ArticleQueryArgs(), $searc
 ```
 Here also we receive response as object of PccPhpSdk\api\Response\PaginatedArticles which can be used further.
 
-`Note: Parameter ArticleQueryArgs is still not implemented.`
-
-
 ## Getting Article By ID / Slug
 
 Using Articles API we can also fetch the article by id or slug.

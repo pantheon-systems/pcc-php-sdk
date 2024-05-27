@@ -68,7 +68,7 @@ class ArticleQueryArgs {
     ArticleSortField $sortField = ArticleSortField::UPDATED_AT,
     ArticleSortOrder $sortOrder = ArticleSortOrder::DESC,
     int $pageSize = 10,
-    int $pageIndex = 0,
+    int $pageIndex = 1,
     ContentType $contentType = ContentType::TREE_PANTHEON_V2
   ) {
     $this->contentType = $contentType;
