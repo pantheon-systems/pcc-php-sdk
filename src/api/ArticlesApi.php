@@ -46,16 +46,17 @@ class ArticlesApi extends PccApi {
   /**
    * Search Articles.
    *
-   * @param ArticleQueryArgs $queryArgs
+   * @param ArticleQueryArgs|null $queryArgs
    *   Query Args.
-   * @param ArticleSearchArgs $searchArgs
+   * @param ArticleSearchArgs|null $searchArgs
    *   Search Criterion.
    *
    * @return PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function searchArticles(ArticleQueryArgs $queryArgs, ArticleSearchArgs $searchArgs): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles(null, $searchArgs);
+  public function searchArticles(?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): PaginatedArticles {
+    // @todo: Consider ArticleQueryArgs for populating the results.
+    $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
 

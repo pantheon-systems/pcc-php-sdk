@@ -21,6 +21,8 @@ class SitesApi extends PccApi {
    * @throws PccClientException
    */
   public function getSite(string $siteId): mixed {
+    // @todo: Create SitesManager to get the site, similar to ArticlesManager.
+    // Once we do this, we can Remove PccApi base class.
     $query = <<<'GRAPHQL'
     query GetSite($siteId: String!) {
       site(id: $siteId) {
