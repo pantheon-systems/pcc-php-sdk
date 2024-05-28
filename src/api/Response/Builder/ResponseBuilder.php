@@ -16,25 +16,20 @@ class ResponseBuilder {
   /**
    * Cast to Article Response.
    *
-   * @param ArticleEntity $entity
+   * @param \PccPhpSdk\api\Response\ArticleEntity $entity
    *   Corresponding Article Entity.
    *
-   * @return Article
+   * @return \PccPhpSdk\api\Response\Article
    *   Article Response object.
    */
   public static function toArticleResponse(ArticleEntity $entity): Article {
-    $response = null;
-    if (!empty($entity->id)) {
+    $response = NULL;
+    if (!empty($entity)) {
+      $entity_properties = get_object_vars($entity);
       $response = new Article();
-      $response->id = $entity->id;
-      $response->slug = $entity->slug;
-      $response->title = $entity->title;
-      $response->siteId = $entity->siteId;
-      $response->content = $entity->content;
-      $response->snippet  = $entity->snippet;
-      $response->tags = $entity->tags;
-      $response->publishedDate = $entity->publishedDate;
-      $response->updatedAt = $entity->updatedAt;
+      foreach ($entity_properties as $key => $value) {
+        $response->$key = $value;
+      }
     }
 
     return $response;
@@ -43,10 +38,10 @@ class ResponseBuilder {
   /**
    * Cast to Paginated Articles List.
    *
-   * @param ArticlesList $articlesList
+   * @param \PccPhpSdk\api\Response\ArticlesList $articlesList
    *   Corresponding ArticlesList Entity.
    *
-   * @return PaginatedArticles
+   * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   PaginatedArticles Response Object.
    */
   public static function toPaginatedArticles(ArticlesList $articlesList): PaginatedArticles {

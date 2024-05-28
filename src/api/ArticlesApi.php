@@ -18,7 +18,7 @@ class ArticlesApi extends PccApi {
   /**
    * Internal Articles Manager Service.
    *
-   * @var ArticlesManager $articlesManager
+   * @var \PccPhpSdk\api\Response\ArticlesManager
    */
   private ArticlesManager $articlesManager;
 
@@ -33,62 +33,71 @@ class ArticlesApi extends PccApi {
   /**
    * Get all articles (paginated).
    *
-   * @return PaginatedArticles
+   * @param array $fields
+   *   The Article fields.
+   *
+   * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list wrapped as PaginatedArticles.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getAllArticles(): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles();
+  public function getAllArticles(array $fields = []): PaginatedArticles {
+    $articles = $this->articlesManager->getArticles(NULL, NULL, $fields);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
 
   /**
    * Search Articles.
    *
-   * @param ArticleQueryArgs|null $queryArgs
+   * @param \PccPhpSdk\api\Query\ArticleQueryArgs $queryArgs
    *   Query Args.
-   * @param ArticleSearchArgs|null $searchArgs
+   * @param \PccPhpSdk\api\Query\ArticleSearchArgs $searchArgs
    *   Search Criterion.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return PaginatedArticles
+   * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function searchArticles(?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs);
+  public function searchArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): PaginatedArticles {
+    $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs, $fields);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
 
   /**
    * Get article by ID.
    *
-   * @var string $id
+   * @param string $id
    *   The article id.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id): ?Article {
-    $articleEntity = $this->articlesManager->getArticleById($id);
-    return ResponseBuilder::toArticleResponse($articleEntity);
+  public function getArticleById(string $id, array $fields = []): ?Article {
+    $articleEntity = $this->articlesManager->getArticleById($id, $fields);
+    return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
   }
 
   /**
    * Get article by slug.
    *
-   * @var string $slug
+   * @param string $slug
    *   The article slug.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleBySlug(string $slug): ?Article {
-    $articleEntity = $this->articlesManager->getArticleBySlug($slug);
-    return ResponseBuilder::toArticleResponse($articleEntity);
+  public function getArticleBySlug(string $slug, array $fields = []): ?Article {
+    $articleEntity = $this->articlesManager->getArticleBySlug($slug, $fields);
+    return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
   }
 
 }

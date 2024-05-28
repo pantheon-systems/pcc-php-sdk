@@ -27,34 +27,40 @@ interface ArticleLoaderInterface {
    *
    * @param string $id
    *   Article ID.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity or null.
    */
-  public function loadById(string $id): ?Article;
+  public function loadById(string $id, array $fields = []): ?Article;
 
   /**
    * Load Article by slug.
    *
    * @param string $slug
    *   Article slug.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\core\Entity\Article|null
    *   Article or null.
    */
-  public function loadBySlug(string $slug): ?Article;
+  public function loadBySlug(string $slug, array $fields = []): ?Article;
 
   /**
    * Load All Articles based on Query and Search args.
    *
-   * @param ArticleQueryArgs|null $queryArgs
+   * @param \PccPhpSdk\api\Query\ArticleQueryArgs|null $queryArgs
    *   Article Query Args.
-   * @param ArticleSearchArgs|null $searchArgs
+   * @param \PccPhpSdk\api\Query\ArticleSearchArgs|null $searchArgs
    *   Article Search Args.
+   * @param array $fields
+   *   The Article fields.
    *
-   * @return ArticlesList
+   * @return \PccPhpSdk\core\Entity\ArticlesList
    *   ArticlesList containing all articles matching the criterion.
    */
-  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs): ArticlesList;
+  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs, array $fields = []): ArticlesList;
 
 }
