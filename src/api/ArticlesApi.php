@@ -59,8 +59,8 @@ class ArticlesApi extends PccApi {
    * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function searchArticles(array $fields, ArticleQueryArgs $queryArgs, ArticleSearchArgs $searchArgs): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles($fields, NULL, $searchArgs);
+  public function searchArticles(array $fields, ?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): PaginatedArticles {
+    $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
 
