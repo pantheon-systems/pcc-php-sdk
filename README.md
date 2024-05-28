@@ -16,6 +16,7 @@
     $fields = ['id', 'snippet', 'slug', 'title'];
     $articles = $articlesApi->getAllArticles($fields);
 ```
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
 
 We receive response as object of PccPhpSdk\api\Response\PaginatedArticles which can be used further.
 
@@ -35,8 +36,10 @@ $searchArgs = new ArticleSearchArgs(
       PublishStatus::PUBLISHED
     );
 $fields = ['id', 'snippet', 'slug', 'title'];
-$paginatedArticles = $articlesApi->searchArticles($fields, new ArticleQueryArgs(), $searchArgs);
+$paginatedArticles = $articlesApi->searchArticles(new ArticleQueryArgs(), $searchArgs, $fields);
 ```
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
+
 Here also we receive response as object of PccPhpSdk\api\Response\PaginatedArticles which can be used further.
 
 ## Getting Article By ID / Slug
@@ -47,10 +50,11 @@ Using Articles API we can also fetch the article by id or slug.
 $contentApi = new ArticlesApi($pccClient);
 $id = 'id-goes-here';
 $fields = ['id', 'snippet', 'slug', 'title'];
-$article1 = $articlesApi->getArticleById($fields, $id);
+$article1 = $articlesApi->getArticleById($id, $fields);
 
 $slug = 'slug-goes-here';
-$article2 = $articlesApi->getArticleBySlug($fields, $slug);
+$article2 = $articlesApi->getArticleBySlug($slug, $fields);
 ```
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
 
 Here the response is PccPhpSdk\api\Response\Article.

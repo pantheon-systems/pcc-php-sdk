@@ -43,38 +43,38 @@ class ArticlesManager {
    * @return \PccPhpSdk\core\Entity\ArticlesList
    *   ArticlesList containing matching articles.
    */
-  public function getArticles(array $fields, ?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL): ArticlesList {
-    return $this->articleLoader->loadAll($fields, $queryArgs, $searchArgs);
+  public function getArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): ArticlesList {
+    return $this->articleLoader->loadAll($queryArgs, $searchArgs, $fields);
   }
 
   /**
    * Get Article by ID.
    *
-   * @param array $fields
-   *   The Article fields.
    * @param string $id
    *   Article ID.
+   * @param array $fields
+   *   The Article fields.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleById(array $fields, string $id): ?Article {
-    return $this->articleLoader->loadById($fields, $id);
+  public function getArticleById(string $id, array $fields = []): ?Article {
+    return $this->articleLoader->loadById($id, $fields);
   }
 
   /**
    * Get Article bu slug.
    *
-   * @param array $fields
-   *   The Article fields.
    * @param string $slug
    *   Article slug.
+   * @param array $fields
+   *   The Article fields.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleBySlug(array $fields, string $slug): ?Article {
-    return $this->articleLoader->loadBySlug($fields, $slug);
+  public function getArticleBySlug(string $slug, array $fields = []): ?Article {
+    return $this->articleLoader->loadBySlug($slug, $fields);
   }
 
 }

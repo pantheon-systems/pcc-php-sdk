@@ -36,7 +36,7 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadById(array $fields, string $id): ?Article {
+  public function loadById(string $id, array $fields = []): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getFields($fields));
     $queryBuilder->filterById($id);
@@ -51,7 +51,7 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadBySlug(array $fields, string $slug): ?Article {
+  public function loadBySlug(string $slug, array $fields = []): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getFields($fields));
     $queryBuilder->filterBySlug($slug);
@@ -66,7 +66,7 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadAll(array $fields, ?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs): ArticlesList {
+  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs, array $fields = []): ArticlesList {
     $queryBuilder = new ArticlesListQueryBuilder();
     $queryBuilder->addFields($this->getFields($fields));
     if ($searchArgs) {
@@ -156,10 +156,13 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * Get default article fields.
    *
+   * @param array $fields
+   *   The Article fields.
+   *
    * @return string[]
    *   Array of fields.
    */
-  protected function getFields(array $fields): array {
+  protected function getFields(array $fields = []): array {
     if (!empty($fields)) {
       return $fields;
     }
