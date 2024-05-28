@@ -11,8 +11,8 @@
 ```
 
 ## Getting all articles
-
 ```php
     $articlesApi = new \PccPhpSdk\api\ArticlesApi($pccClient);
-    $articles = $articlesApi->getAllArticles();
+    $fields = ['id', 'snippet', 'slug', 'title'];
+    $articles = $articlesApi->getAllArticles($fields);
 ```
