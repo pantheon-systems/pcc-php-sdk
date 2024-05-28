@@ -16,17 +16,17 @@ use PccPhpSdk\core\PccClient;
 class ArticlesManager {
 
   /**
-   *  Article Loader.
+   * Article Loader.
    *
-   * @var ArticleLoaderInterface
+   * @var \PccPhpSdk\core\Entity\ArticleLoaderInterface
    */
   protected ArticleLoaderInterface $articleLoader;
 
   /**
    * Constructor for Content API.
    *
-   * @param PccClient $pccClient
-   *   Preconfigured PccClient
+   * @param \PccPhpSdk\core\PccClient $pccClient
+   *   Preconfigured PccClient.
    */
   public function __construct(PccClient $pccClient) {
     $this->articleLoader = new ArticleLoader($pccClient);
@@ -35,40 +35,46 @@ class ArticlesManager {
   /**
    * Get Articles based on Query & Search Arguments.
    *
-   * @param ArticleSearchArgs|null $args
-   *    Search Arguments.
+   * @param array $fields
+   *   The Article fields.
+   * @param \PccPhpSdk\api\Query\ArticleSearchArgs|null $args
+   *   Search Arguments.
    *
-   * @return ArticlesList
-   *    ArticlesList containing matching articles.
+   * @return \PccPhpSdk\core\Entity\ArticlesList
+   *   ArticlesList containing matching articles.
    */
-  public function getArticles(?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): ArticlesList {
-    return $this->articleLoader->loadAll(null, $searchArgs);
+  public function getArticles(array $fields, ?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL): ArticlesList {
+    return $this->articleLoader->loadAll($fields, NULL, $searchArgs);
   }
 
   /**
    * Get Article by ID.
    *
+   * @param array $fields
+   *   The Article fields.
    * @param string $id
    *   Article ID.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleById(string $id): ?Article {
-    return $this->articleLoader->loadById($id);
+  public function getArticleById(array $fields, string $id): ?Article {
+    return $this->articleLoader->loadById($fields, $id);
   }
 
   /**
    * Get Article bu slug.
    *
+   * @param array $fields
+   *   The Article fields.
    * @param string $slug
    *   Article slug.
    *
-   * @return Article|null
+   * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleBySlug(string $slug): ?Article {
-    return $this->articleLoader->loadBySlug($slug);
+  public function getArticleBySlug(array $fields, string $slug): ?Article {
+    return $this->articleLoader->loadBySlug($fields, $slug);
   }
 
 }
