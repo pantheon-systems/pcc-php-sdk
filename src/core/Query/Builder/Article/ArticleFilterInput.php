@@ -14,11 +14,6 @@ use PccPhpSdk\api\Query\Enums\PublishStatus;
 class ArticleFilterInput {
 
   /**
-   * The constant representing the article filter input.
-   */
-  public const ARTICLE_FILTER_INPUT = 'ArticleFilterInput';
-
-  /**
    * @var string $bodyContains
    *   The string to search for within the body of articles.
    */

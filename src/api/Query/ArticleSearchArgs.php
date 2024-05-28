@@ -55,7 +55,7 @@ class ArticleSearchArgs {
    * @param PublishStatus $publishStatus
    *   The publishing status to filter articles by.
    */
-  public function __construct(string $bodyContains, string $tagContains, string $titleContains, PublishStatus $publishStatus) {
+  public function __construct(string $bodyContains = '', string $tagContains = '', string $titleContains = '', PublishStatus $publishStatus = PublishStatus::PUBLISHED) {
     $this->bodyContains = $bodyContains;
     $this->tagContains = $tagContains;
     $this->titleContains = $titleContains;

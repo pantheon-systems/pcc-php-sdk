@@ -6,7 +6,7 @@ Provides API to fetch Articles, Site information.
 
 ### Articles API
 
-Articles API to fetch articles.
+Articles API to fetch articles, search articles, get article by ID / Slug.
 
 ### Sites API
 
@@ -18,7 +18,8 @@ Resources that are useful to play around with the API.
 
 ### Query
 
-Contains query arguments used for filtering, searching the articles.
+Contains query arguments used for filtering, searching the articles. Contains ArticleQueryArgs, ArticleSearchArgs and
+enums required to build query arguments.
 
 ### Response
 

@@ -42,7 +42,7 @@ class ArticlesManager {
    *    ArticlesList containing matching articles.
    */
   public function getArticles(?ArticleQueryArgs $queryArgs = null, ?ArticleSearchArgs $searchArgs = null): ArticlesList {
-    return $this->articleLoader->loadAll(null, $searchArgs);
+    return $this->articleLoader->loadAll($queryArgs, $searchArgs);
   }
 
   /**
