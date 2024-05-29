@@ -51,7 +51,7 @@ $queryArgs = new ArticleQueryArgs(
     ArticleSortOrder::DESC,
     20,
     1,
-    ContentType::TREE_PANTHEON_V2
+    ContentType::TEXT_MARKDOWN
 );
 
 $paginatedArticles = $articlesApi->searchArticles($queryArgs);
@@ -100,7 +100,7 @@ $queryArgs = new ArticleQueryArgs(
     ArticleSortOrder::DESC,
     20,
     1,
-    ContentType::TREE_PANTHEON_V2
+    ContentType::TEXT_MARKDOWN
 );
 $searchArgs = new ArticleSearchArgs(
     'example body',

@@ -69,7 +69,7 @@ class ArticleQueryArgs {
     ArticleSortOrder $sortOrder = ArticleSortOrder::DESC,
     int $pageSize = 10,
     int $pageIndex = 1,
-    ContentType $contentType = ContentType::TREE_PANTHEON_V2
+    ContentType $contentType = ContentType::TEXT_MARKDOWN,
   ) {
     $this->contentType = $contentType;
     $this->sortField = $sortField;

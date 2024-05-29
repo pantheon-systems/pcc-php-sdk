@@ -8,7 +8,8 @@
     "guzzlehttp/guzzle": "^7.8",
     "guzzlehttp/psr7": "^2.6",
     "guzzlehttp/promises": "^2.0",
-    "cfpinto/graphql": "v2.0.0"
+    "cfpinto/graphql": "v2.0.0",
+    "erusev/parsedown": "^1.7"
   },
   "autoload": {
     "psr-4": {

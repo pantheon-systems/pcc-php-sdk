@@ -58,7 +58,7 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    *
    * @var ContentType
    */
-  private ContentType $contentType = ContentType::TREE_PANTHEON_V2;
+  private ContentType $contentType = ContentType::TEXT_MARKDOWN;
 
   /**
    * Build the GraphQL query.
