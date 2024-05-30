@@ -146,11 +146,33 @@ class ArticleLoader implements ArticleLoaderInterface {
           $article->{$field} = $data[$field] ?: [];
           break;
 
+        case 'content':
+        case 'snippet':
+          $article->{$field} = $data[$field] ? $this->parseMarkdownToHtml($data[$field]) : '';
+          break;
+
         default:
           $article->{$field} = $data[$field] ?? '';
       }
     }
     return $article;
+  }
+
+  /**
+   * Convert markdown format to html.
+   *
+   * @param string $content
+   *   The markdown string.
+   *
+   * @return string
+   *   Returns the html string.
+   */
+  private function parseMarkdownToHtml(string $content): string {
+    // Replace all occurrences of the pattern `{#h\..*}\n` with `\n`.
+    $pattern = '/{#h\..*}\n/';
+    $content = preg_replace($pattern, "\n", $content);
+    $parsedown = new \Parsedown();
+    return $parsedown->text($content);
   }
 
   /**

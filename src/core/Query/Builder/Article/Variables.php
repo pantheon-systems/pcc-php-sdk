@@ -5,7 +5,7 @@ namespace PccPhpSdk\core\Query\Builder\Article;
 use GraphQL\Entities\Variable;
 
 /**
- * Class Variables
+ * Class Variables.
  *
  * Defines constants and methods to handle variable definitions for GraphQL queries.
  */
@@ -23,11 +23,13 @@ class Variables {
    *
    * @param string $fieldName
    *   The field name for which the variable definition is needed.
+   * @param string $defaultValue
+   *   The default value for field.
    *
-   * @return Variable|null
+   * @return \GraphQL\Entities\Variable|null
    *   Returns the variable definition or null if the field name is invalid.
    */
-  public static function getVariableDefinition(string $fieldName): ?Variable {
+  public static function getVariableDefinition(string $fieldName, string $defaultValue = ''): ?Variable {
     switch ($fieldName) {
       case self::FILTER:
         return new Variable(self::FILTER, 'ArticleFilterInput');
@@ -45,10 +47,11 @@ class Variables {
         return new Variable(self::PAGE_INDEX, 'Float');
 
       case self::CONTENT_TYPE:
-        return new Variable(self::CONTENT_TYPE, 'ContentType');
+        return new Variable(self::CONTENT_TYPE, 'ContentType', $defaultValue);
 
       default:
-        return null;
+        return NULL;
     }
   }
+
 }

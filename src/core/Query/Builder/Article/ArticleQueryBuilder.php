@@ -2,7 +2,6 @@
 
 namespace PccPhpSdk\core\Query\Builder\Article;
 
-use ArrayObject;
 use GraphQL\Actions\Query;
 use GraphQL\Entities\Variable;
 use PccPhpSdk\api\Query\Enums\ContentType;
@@ -15,20 +14,19 @@ use PccPhpSdk\core\Query\QueryInterface;
  * Article Query Builder to get single Article.
  */
 class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
-
   /**
    * Article ID to filter.
    *
-   * @var string|null $id
+   * @var string|null
    */
-  private ?string $id = null;
+  private ?string $id = NULL;
 
   /**
    * Article Slug to filter.
    *
-   * @var string|null $slug
+   * @var string|null
    */
-  private ?string $slug = null;
+  private ?string $slug = NULL;
 
   /**
    * Add ID for filter in the query.
@@ -36,7 +34,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    * @param string $id
    *   ID value.
    *
-   * @return QueryBuilderInterface
+   * @return \GraphQL\Actions\QueryBuilderInterface
    *   Returns self.
    */
   public function filterById(string $id): QueryBuilderInterface {
@@ -50,9 +48,9 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    * If ID filter already present, that will take precedence.
    *
    * @param string $slug
-   *    Slug Value.
+   *   Slug Value.
    *
-   * @return QueryBuilderInterface
+   * @return \GraphQL\Actions\QueryBuilderInterface
    *   Returns self.
    */
   public function filterBySlug(string $slug): QueryBuilderInterface {
@@ -78,47 +76,48 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    *   Returns Query Args.
    */
   private function getQueryArgs(): array {
+    $content_type = ContentType::TEXT_MARKDOWN->value;
     $args = [
-      'contentType' => ContentType::TREE_PANTHEON_V2,
+      Variables::CONTENT_TYPE => Variables::getVariableDefinition(Variables::CONTENT_TYPE, $content_type),
     ];
+
     $variable = $this->getVariableDef();
     if (!empty($variable)) {
       $args = array_merge($args, $variable);
     }
-
     return $args;
   }
 
   /**
    * Get Variable value.
    *
-   * @return ArrayObject
+   * @return \ArrayObject
    *   Returns Variable mapped values.
    */
-  private function getVariableVal(): ArrayObject {
+  private function getVariableVal(): \ArrayObject {
     $value = [];
-    if ($this->id !== null) {
+    if ($this->id !== NULL) {
       $value[ArticleLoaderInterface::ID] = $this->id;
     }
-    elseif ($this->slug !== null) {
+    elseif ($this->slug !== NULL) {
       $value[ArticleLoaderInterface::SLUG] = $this->slug;
     }
 
-    return new ArrayObject($value);
+    return new \ArrayObject($value);
   }
 
   /**
-   * Get Variable Definition for GraphQL\Actions\Query
+   * Get Variable Definition for GraphQL\Actions\Query.
    *
-   * @return Variable[]|null
+   * @return \GraphQL\Entities\Variable[]|null
    *   Return ID or Slug variable definition or null.
    */
   private function getVariableDef(): ?array {
-    $variable = null;
-    if ($this->id !== null) {
+    $variable = NULL;
+    if ($this->id !== NULL) {
       $variable = [ArticleLoaderInterface::ID => $this->buildIdVariableDef()];
     }
-    else if ($this->slug !== null) {
+    elseif ($this->slug !== NULL) {
       $variable = [ArticleLoaderInterface::SLUG => $this->buildSlugVariableDef()];
     }
 
@@ -128,7 +127,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   /**
    * Build ID Variable Definition for the GraphQL\Actions\Query.
    *
-   * @return Variable
+   * @return \GraphQL\Entities\Variable
    *   Return Variable Definition.
    */
   private function buildIdVariableDef(): Variable {
@@ -138,10 +137,11 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   /**
    * Build ID Variable Definition for the GraphQL\Actions\Query.
    *
-   * @return Variable
+   * @return \GraphQL\Entities\Variable
    *   Return Variable Definition.
    */
   private function buildSlugVariableDef(): Variable {
     return new Variable(ArticleLoaderInterface::SLUG, 'String');
   }
+
 }
