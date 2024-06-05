@@ -76,9 +76,18 @@ class ArticleLoader implements ArticleLoaderInterface {
       $queryBuilder->setQueryArgs($queryArgs);
     }
     $query = $queryBuilder->build();
+
     $response = $this->sendRequest($query);
-    $response = $response['articles'] ?: [];
-    return $this->toArticlesList($fields, $response);
+    $articles = $response['articles'] ?: [];
+    $articles_list = $this->toArticlesList($fields, $articles);
+
+    if (!empty($response['total'])) {
+      $articles_list->addTotalArticlesCount($response['total']);
+    }
+    if (!empty($response['cursor'])) {
+      $articles_list->addPageCursor($response['cursor']);
+    }
+    return $articles_list;
   }
 
   /**
@@ -92,10 +101,19 @@ class ArticleLoader implements ArticleLoaderInterface {
    */
   private function sendRequest(QueryInterface $query): array {
     $response = $this->pccClient->executeQuery($query);
+
     $jsonResponse = json_decode($response, TRUE);
     $result = [];
-    if (!empty($jsonResponse) && !empty($jsonResponse['data'])) {
-      $result = $jsonResponse['data'];
+    if (!empty($jsonResponse)) {
+      if (!empty($jsonResponse['data']['articles'])) {
+        $result['articles'] = $jsonResponse['data']['articles'];
+      }
+      if (!empty($jsonResponse['extensions']['pagination']['total'])) {
+        $result['total'] = $jsonResponse['extensions']['pagination']['total'];
+      }
+      if (!empty($jsonResponse['extensions']['pagination']['cursor'])) {
+        $result['cursor'] = $jsonResponse['extensions']['pagination']['cursor'];
+      }
     }
     return $result;
   }

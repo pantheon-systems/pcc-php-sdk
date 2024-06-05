@@ -49,7 +49,8 @@ class ResponseBuilder {
     foreach ($articlesList->articles as $articleEntity) {
       $response->articles[] = self::toArticleResponse($articleEntity);
     }
-    $response->total = count($articlesList->articles);
+    $response->total = $articlesList->total;
+    $response->cursor = $articlesList->cursor;
     return $response;
   }
 
