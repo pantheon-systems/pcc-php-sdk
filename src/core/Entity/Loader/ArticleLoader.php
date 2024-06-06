@@ -76,7 +76,6 @@ class ArticleLoader implements ArticleLoaderInterface {
       $queryBuilder->setQueryArgs($queryArgs);
     }
     $query = $queryBuilder->build();
-
     $response = $this->sendRequest($query);
     $articles = $response['articles'] ?? [];
     $articles_list = $this->toArticlesList($fields, $articles);

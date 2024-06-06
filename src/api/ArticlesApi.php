@@ -31,23 +31,7 @@ class ArticlesApi extends PccApi {
   }
 
   /**
-   * Get all articles (paginated).
-   *
-   * @param array $fields
-   *   The Article fields.
-   *
-   * @return \PccPhpSdk\api\Response\PaginatedArticles
-   *   Returns articles list wrapped as PaginatedArticles.
-   *
-   * @throws \PccPhpSdk\Exception\PccClientException
-   */
-  public function getAllArticles(array $fields = []): PaginatedArticles {
-    $articles = $this->articlesManager->getArticles(NULL, NULL, $fields);
-    return ResponseBuilder::toPaginatedArticles($articles);
-  }
-
-  /**
-   * Search Articles.
+   * Get All Articles.
    *
    * @param \PccPhpSdk\api\Query\ArticleQueryArgs $queryArgs
    *   Query Args.
@@ -59,7 +43,7 @@ class ArticlesApi extends PccApi {
    * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function searchArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): PaginatedArticles {
+  public function getAllArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): PaginatedArticles {
     $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs, $fields);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
