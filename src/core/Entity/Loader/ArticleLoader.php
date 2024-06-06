@@ -78,7 +78,7 @@ class ArticleLoader implements ArticleLoaderInterface {
     $query = $queryBuilder->build();
 
     $response = $this->sendRequest($query);
-    $articles = $response['articles'] ?: [];
+    $articles = $response['articles'] ?? [];
     $articles_list = $this->toArticlesList($fields, $articles);
 
     if (!empty($response['total'])) {
