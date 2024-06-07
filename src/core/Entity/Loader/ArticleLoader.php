@@ -42,7 +42,6 @@ class ArticleLoader implements ArticleLoaderInterface {
     $queryBuilder->filterById($id);
 
     $query = $queryBuilder->build();
-
     $response = $this->sendRequest($query);
     $response = $response['article'] ?: NULL;
     return !empty($response) ? $this->toArticle($fields, $response) : NULL;
@@ -57,9 +56,9 @@ class ArticleLoader implements ArticleLoaderInterface {
     $queryBuilder->filterBySlug($slug);
 
     $query = $queryBuilder->build();
-
     $response = $this->sendRequest($query);
-    $response = $response['article'] ?: NULL;
+
+    $response = $response['article'] ?? NULL;
     return !empty($response) ? $this->toArticle($fields, $response) : NULL;
   }
 
@@ -102,8 +101,12 @@ class ArticleLoader implements ArticleLoaderInterface {
     $response = $this->pccClient->executeQuery($query);
 
     $jsonResponse = json_decode($response, TRUE);
+
     $result = [];
     if (!empty($jsonResponse)) {
+      if (!empty($jsonResponse['data']['article'])) {
+        $result['article'] = $jsonResponse['data']['article'];
+      }
       if (!empty($jsonResponse['data']['articles'])) {
         $result['articles'] = $jsonResponse['data']['articles'];
       }
