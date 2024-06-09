@@ -58,3 +58,39 @@ $article2 = $articlesApi->getArticleBySlug($slug, $fields);
 Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
 
 Here the response is PccPhpSdk\api\Response\Article.
+
+### Preview Article (By ID / Slug)
+
+To view latest modifications of the article which are not published, we can use `REALTIME` publishing level together with ArticlesAPI.
+To get preview of the article use `publishingLevel` argument as following. 
+
+```php
+$contentApi = new ArticlesApi($pccClient);
+$id = 'id-goes-here';
+$fields = ['id', 'snippet', 'slug', 'title'];
+$article1 = $articlesApi->getArticleById($id, $fields);
+$publishingLevel = \PccPhpSdk\api\Query\Enums\PublishingLevel::REALTIME;
+
+$slug = 'slug-goes-here';
+$article2 = $articlesApi->getArticleBySlug($slug, $fields, $publishingLevel);
+```
+
+Apart from reusing already created PCC Client created above, preview of the article can also be fetched without site token and by using the PCC Grant.
+
+```php
+$pccClientConfig = new \PccPhpSdk\core\PccClientConfig(
+          '--site-id-here--',
+          '', // Leave this empty or use null
+          null,
+          '--pcc-grant-here--' // PCC Grant Token here, may or may not include pcc_grant prefix.
+        );
+$pccClient = new \PccPhpSdk\core\PccClient($pccClientConfig);
+$contentApi = new ArticlesApi($pccClient);
+$id = 'id-goes-here';
+$fields = ['id', 'snippet', 'slug', 'title'];
+$article1 = $articlesApi->getArticleById($id, $fields);
+$publishingLevel = \PccPhpSdk\api\Query\Enums\PublishingLevel::REALTIME;
+
+$slug = 'slug-goes-here';
+$article2 = $articlesApi->getArticleBySlug($slug, $fields, $publishingLevel);
+```
