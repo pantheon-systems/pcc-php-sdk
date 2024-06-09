@@ -18,6 +18,8 @@ class Variables {
   public const PAGE_INDEX = 'cursor';
   public const CONTENT_TYPE = 'contentType';
 
+  public const PUBLISHING_LEVEL = 'publishingLevel';
+
   /**
    * Get variable definition based on the field name.
    *
@@ -48,6 +50,9 @@ class Variables {
 
       case self::CONTENT_TYPE:
         return new Variable(self::CONTENT_TYPE, 'ContentType', $defaultValue);
+
+      case self::PUBLISHING_LEVEL:
+        return new Variable(self::PUBLISHING_LEVEL, 'PublishingLevel');
 
       default:
         return NULL;

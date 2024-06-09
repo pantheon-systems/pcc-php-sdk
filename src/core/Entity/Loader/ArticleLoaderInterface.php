@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\core\Entity\Loader;
 
+use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\core\Entity\Article;
@@ -29,11 +30,13 @@ interface ArticleLoaderInterface {
    *   Article ID.
    * @param array $fields
    *   The Article fields.
+   * @param PublishingLevel $publishingLevel
+   *     The publishing Level.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity or null.
    */
-  public function loadById(string $id, array $fields = []): ?Article;
+  public function loadById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article;
 
   /**
    * Load Article by slug.
@@ -42,11 +45,13 @@ interface ArticleLoaderInterface {
    *   Article slug.
    * @param array $fields
    *   The Article fields.
+   * @param PublishingLevel $publishingLevel
+   *     The publishing Level.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article or null.
    */
-  public function loadBySlug(string $slug, array $fields = []): ?Article;
+  public function loadBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article;
 
   /**
    * Load All Articles based on Query and Search args.
