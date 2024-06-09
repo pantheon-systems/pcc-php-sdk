@@ -62,7 +62,7 @@ class ArticlesManager {
    *   Article Entity.
    */
   public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
-    return $this->articleLoader->loadById($id, $fields);
+    return $this->articleLoader->loadById($id, $fields, $publishingLevel);
   }
 
   /**
