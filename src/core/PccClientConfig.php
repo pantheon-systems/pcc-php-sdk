@@ -34,6 +34,13 @@ class PccClientConfig {
   private string $siteToken;
 
   /**
+   * PCC Grant.
+   *
+   * @var string|null
+   */
+  private ?string $pccGrant;
+
+  /**
    * Constructor
    *
    * @param string $siteId
@@ -42,11 +49,14 @@ class PccClientConfig {
    *   Site Token.
    * @param string|null $pccHost
    *   Pcc Host.
+   * @param string|null $pccGrant
+   *   Pcc Grant.
    */
-  public function __construct(string $siteId, string $siteToken, string $pccHost = null) {
+  public function __construct(string $siteId, string $siteToken, string $pccHost = null, string $pccGrant = null) {
     $this->siteId = $siteId;
     $this->siteToken = $siteToken;
     $this->pccHost = $pccHost ?? self::PCC_HOST_DEFAULT;
+    $this->pccGrant = $pccGrant;
   }
 
   /**
@@ -76,6 +86,21 @@ class PccClientConfig {
    *   PCC Site Token
    */
   public function getSiteToken() : string {
-    return $this->siteToken;
+    return !empty($this->siteToken) ? $this->siteToken : $this->getPCCGrant();
+  }
+
+  /**
+   * Get PCC Grant string.
+   *
+   * @return string
+   *   PCC grant string.
+   */
+  private function getPCCGrant() : string {
+    $pccGrant = $this->pccGrant;
+    if (!empty($pccGrant) && !str_contains('pcc_grant', $pccGrant)) {
+     $pccGrant = "pcc_grant $pccGrant";
+    }
+
+    return $pccGrant ?? '';
   }
 }
