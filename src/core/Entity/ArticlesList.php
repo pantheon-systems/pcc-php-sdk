@@ -67,7 +67,7 @@ class ArticlesList {
    * Add page cursor.
    *
    * @param int $cursor
-   *   The toal cont.
+   *   The cursor.
    *
    * @return void
    *   Nothing.

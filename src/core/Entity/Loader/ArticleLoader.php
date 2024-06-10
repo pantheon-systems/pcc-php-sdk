@@ -99,10 +99,17 @@ class ArticleLoader implements ArticleLoaderInterface {
    */
   private function sendRequest(QueryInterface $query): array {
     $response = $this->pccClient->executeQuery($query);
-
     $jsonResponse = json_decode($response, TRUE);
 
+    if ($jsonResponse === NULL) {
+      throw new \Exception("Failed to parse JSON response.");
+    }
+    if (!isset($jsonResponse['data']) || !is_array($jsonResponse['data'])) {
+      throw new \Exception("Invalid JSON response structure.");
+    }
+
     $result = [];
+
     if (!empty($jsonResponse)) {
       if (!empty($jsonResponse['data']['article'])) {
         $result['article'] = $jsonResponse['data']['article'];
