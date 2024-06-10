@@ -64,7 +64,7 @@ class ArticlesList {
   }
 
   /**
-   * Add total count of articles.
+   * Add page cursor.
    *
    * @param int $cursor
    *   The toal cont.
