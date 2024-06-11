@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\api\Response\Article;
@@ -55,14 +56,16 @@ class ArticlesApi extends PccApi {
    *   The article id.
    * @param array $fields
    *   The Article fields.
+   * @param PublishingLevel $publishingLevel
+   *   The publishing level.
    *
    * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id, array $fields = []): ?Article {
-    $articleEntity = $this->articlesManager->getArticleById($id, $fields);
+  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
+    $articleEntity = $this->articlesManager->getArticleById($id, $fields, $publishingLevel);
     return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
   }
 
@@ -73,14 +76,16 @@ class ArticlesApi extends PccApi {
    *   The article slug.
    * @param array $fields
    *   The Article fields.
+   * @param PublishingLevel $publishingLevel
+   *   The publishing Level.
    *
    * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleBySlug(string $slug, array $fields = []): ?Article {
-    $articleEntity = $this->articlesManager->getArticleBySlug($slug, $fields);
+  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
+    $articleEntity = $this->articlesManager->getArticleBySlug($slug, $fields, $publishingLevel);
     return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
   }
 

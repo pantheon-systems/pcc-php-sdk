@@ -71,4 +71,11 @@ class Article {
    * @var string $updatedAt
    */
   public string $updatedAt;
+
+  /**
+   * Publishing Level.
+   *
+   * @var string $publishingLevel
+   */
+  public string $publishingLevel;
 }

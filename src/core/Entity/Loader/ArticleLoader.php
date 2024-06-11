@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\core\Entity\Loader;
 
+use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
 use PccPhpSdk\core\Entity\Article;
@@ -36,10 +37,11 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadById(string $id, array $fields = []): ?Article {
+  public function loadById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getFields($fields));
     $queryBuilder->filterById($id);
+    $queryBuilder->setPublishingLevel($publishingLevel);
 
     $query = $queryBuilder->build();
     $response = $this->sendRequest($query);
@@ -50,10 +52,11 @@ class ArticleLoader implements ArticleLoaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function loadBySlug(string $slug, array $fields = []): ?Article {
+  public function loadBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
     $queryBuilder = new ArticleQueryBuilder();
     $queryBuilder->addFields($this->getFields($fields));
     $queryBuilder->filterBySlug($slug);
+    $queryBuilder->setPublishingLevel($publishingLevel);
 
     $query = $queryBuilder->build();
     $response = $this->sendRequest($query);

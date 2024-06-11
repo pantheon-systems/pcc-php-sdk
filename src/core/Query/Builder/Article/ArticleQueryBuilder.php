@@ -4,6 +4,7 @@ namespace PccPhpSdk\core\Query\Builder\Article;
 
 use GraphQL\Actions\Query;
 use GraphQL\Entities\Variable;
+use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\Enums\ContentType;
 use PccPhpSdk\core\Entity\Loader\ArticleLoaderInterface;
 use PccPhpSdk\core\Query\Builder\QueryBuilderInterface;
@@ -29,12 +30,19 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   private ?string $slug = NULL;
 
   /**
+   * Publishing Level.
+   *
+   * @var PublishingLevel
+   */
+  private PublishingLevel $publishing_level = PublishingLevel::PRODUCTION;
+
+  /**
    * Add ID for filter in the query.
    *
    * @param string $id
    *   ID value.
    *
-   * @return \GraphQL\Actions\QueryBuilderInterface
+   * @return \PccPhpSdk\core\Query\Builder\QueryBuilderInterface
    *   Returns self.
    */
   public function filterById(string $id): QueryBuilderInterface {
@@ -50,11 +58,25 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    * @param string $slug
    *   Slug Value.
    *
-   * @return \GraphQL\Actions\QueryBuilderInterface
+   * @return \PccPhpSdk\core\Query\Builder\QueryBuilderInterface
    *   Returns self.
    */
   public function filterBySlug(string $slug): QueryBuilderInterface {
     $this->slug = $slug;
+    return $this;
+  }
+
+  /**
+   * Set publishing level.
+   *
+   * @param ?PublishingLevel $publishing_level
+   *   Publishing Level.
+   *
+   * @return QueryBuilderInterface
+   *   Return self.
+   */
+  public function setPublishingLevel(?PublishingLevel $publishing_level): QueryBuilderInterface {
+    $this->publishing_level = empty($publishing_level) ? PublishingLevel::PRODUCTION : $publishing_level;
     return $this;
   }
 
@@ -102,6 +124,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
     elseif ($this->slug !== NULL) {
       $value[ArticleLoaderInterface::SLUG] = $this->slug;
     }
+    $value[Variables::PUBLISHING_LEVEL] = $this->publishing_level;
 
     return new \ArrayObject($value);
   }
@@ -120,6 +143,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
     elseif ($this->slug !== NULL) {
       $variable = [ArticleLoaderInterface::SLUG => $this->buildSlugVariableDef()];
     }
+    $variable[Variables::PUBLISHING_LEVEL] = $this->buildPublishingLevelVariableDef();
 
     return $variable;
   }
@@ -144,4 +168,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
     return new Variable(ArticleLoaderInterface::SLUG, 'String');
   }
 
+  private function buildPublishingLevelVariableDef(): Variable {
+    return Variables::getVariableDefinition(Variables::PUBLISHING_LEVEL);
+  }
 }
