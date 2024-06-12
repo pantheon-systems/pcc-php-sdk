@@ -36,7 +36,7 @@ $searchArgs = new ArticleSearchArgs(
       PublishStatus::PUBLISHED
     );
 $fields = ['id', 'snippet', 'slug', 'title'];
-$paginatedArticles = $articlesApi->searchArticles(new ArticleQueryArgs(), $searchArgs, $fields);
+$paginatedArticles = $articlesApi->getAllArticles(new ArticleQueryArgs(), $searchArgs, $fields);
 ```
 Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
 

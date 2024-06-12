@@ -3,7 +3,6 @@
 namespace PccPhpSdk\api;
 
 use PccPhpSdk\core\Query\GraphQLQuery;
-use PccPhpSdk\Exception\PccClientException;
 
 /**
  * Site API to get site.
@@ -18,16 +17,18 @@ class SitesApi extends PccApi {
    *
    * @return mixed
    *   Returns site information as JSON.
-   * @throws PccClientException
+   *
+   * @throws \PccPhpSdk\Exception\PccClientException
    */
   public function getSite(string $siteId): mixed {
-    // @todo: Create SitesManager to get the site, similar to ArticlesManager.
+    // @todo Create SitesManager to get the site, similar to ArticlesManager.
     // Once we do this, we can Remove PccApi base class.
     $query = <<<'GRAPHQL'
     query GetSite($siteId: String!) {
       site(id: $siteId) {
         id
-        url
+        url,
+        metadataFields
       }
     }
     GRAPHQL;
@@ -36,4 +37,5 @@ class SitesApi extends PccApi {
     $graphQLQuery = new GraphQLQuery($query, $variables);
     return $this->pccClient->executeQuery($graphQLQuery);
   }
+
 }

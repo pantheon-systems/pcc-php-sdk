@@ -30,7 +30,7 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    *
    * @var int|null
    */
-  private ?int $pageSize = 10;
+  private ?int $pageSize = 20;
 
   /**
    * Field to sort the articles by.

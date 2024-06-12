@@ -54,7 +54,7 @@ $queryArgs = new ArticleQueryArgs(
     ContentType::TEXT_MARKDOWN
 );
 
-$paginatedArticles = $articlesApi->searchArticles($queryArgs);
+$paginatedArticles = $articlesApi->getAllArticles($queryArgs);
 
 ```
 ## ArticleSearchArgs
@@ -109,5 +109,5 @@ $searchArgs = new ArticleSearchArgs(
     PublishStatus::PUBLISHED
 );
 
-$paginatedArticles = $articlesApi->searchArticles($queryArgs, $searchArgs);
+$paginatedArticles = $articlesApi->getAllArticles($queryArgs, $searchArgs);
 ```
