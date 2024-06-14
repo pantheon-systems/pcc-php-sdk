@@ -11,6 +11,7 @@ use PccPhpSdk\core\Entity\ArticlesList;
  * Response builder class.
  * Provides static methods to convert internal Entities to Response objects.
  */
+#[\AllowDynamicProperties]
 class ResponseBuilder {
 
   /**
