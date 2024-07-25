@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\api;
 
+use PccPhpSdk\api\Query\Enums\ContentType;
 use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
@@ -64,8 +65,8 @@ class ArticlesApi extends PccApi {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
-    $articleEntity = $this->articlesManager->getArticleById($id, $fields, $publishingLevel);
+  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null): ?Article {
+	$articleEntity = $this->articlesManager->getArticleById(...func_get_args());
     return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
   }
 
