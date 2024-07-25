@@ -96,8 +96,8 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    * @return QueryBuilderInterface
    *   Return self.
    */
-  public function setContentType(ContentType $content_type): QueryBuilderInterface {
-    $this->content_type = $content_type;
+  public function setContentType(?ContentType $content_type): QueryBuilderInterface {
+    $this->content_type = empty($content_type) ? ContentType::TEXT_MARKDOWN : $content_type;
     return $this;
   }
 

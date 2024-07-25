@@ -50,7 +50,7 @@ class ArticleLoader implements ArticleLoaderInterface {
     $query = $queryBuilder->build();
     $response = $this->sendRequest($query);
     $response = $response['article'] ?: NULL;
-    return !empty($response) ? $this->toArticle($fields, $response) : NULL;
+    return !empty($response) ? $this->toArticle($fields, $response, $contentType) : NULL;
   }
 
   /**
@@ -164,11 +164,13 @@ class ArticleLoader implements ArticleLoaderInterface {
    *   The article fields.
    * @param array $data
    *   Response data.
+   * @param ContentType $contentType
+   *   Response data.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article entity or null.
    */
-  private function toArticle(array $fields, array $data): ?Article {
+	private function toArticle(array $fields, array $data, ?ContentType $contentType = null): ?Article {
     if (empty($data)) {
       return NULL;
     }
@@ -182,7 +184,12 @@ class ArticleLoader implements ArticleLoaderInterface {
 
         case 'content':
         case 'snippet':
-          $article->{$field} = $data[$field] ? $this->parseMarkdownToHtml($data[$field]) : '';
+		  // If content type is TREE_PANTHEON_V2, then don't parse
+		  if ($contentType == ContentType::TREE_PANTHEON_V2) {
+			$article->{$field} = $data[$field];
+		  }else{
+            $article->{$field} = $data[$field] ? $this->parseMarkdownToHtml($data[$field]) : '';
+		  }
           break;
 
         default:
