@@ -37,6 +37,13 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   private PublishingLevel $publishing_level = PublishingLevel::PRODUCTION;
 
   /**
+   * Content Type.
+   *
+   * @var ContentType
+   */
+  private ContentType $content_type = ContentType::TEXT_MARKDOWN;
+
+  /**
    * Add ID for filter in the query.
    *
    * @param string $id
@@ -81,6 +88,20 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   }
 
   /**
+   * Set content type.
+   *
+   * @param ?ContentType $content_type
+   *   Content type.
+   *
+   * @return QueryBuilderInterface
+   *   Return self.
+   */
+  public function setContentType(?ContentType $content_type): QueryBuilderInterface {
+    $this->content_type = empty($content_type) ? ContentType::TEXT_MARKDOWN : $content_type;
+    return $this;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public function build(): QueryInterface {
@@ -98,7 +119,7 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
    *   Returns Query Args.
    */
   private function getQueryArgs(): array {
-    $content_type = ContentType::TEXT_MARKDOWN->value;
+    $content_type = $this->content_type->value;
     $args = [
       Variables::CONTENT_TYPE => Variables::getVariableDefinition(Variables::CONTENT_TYPE, $content_type),
     ];

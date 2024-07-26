@@ -2,6 +2,7 @@
 
 namespace PccPhpSdk\core\Services;
 
+use PccPhpSdk\api\Query\Enums\ContentType;
 use PccPhpSdk\api\Query\Enums\PublishingLevel;
 use PccPhpSdk\api\Query\ArticleQueryArgs;
 use PccPhpSdk\api\Query\ArticleSearchArgs;
@@ -61,8 +62,8 @@ class ArticlesManager {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
-    return $this->articleLoader->loadById($id, $fields, $publishingLevel);
+  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null): ?Article {
+	  return $this->articleLoader->loadById(...func_get_args());
   }
 
   /**
