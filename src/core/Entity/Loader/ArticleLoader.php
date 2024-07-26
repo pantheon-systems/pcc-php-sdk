@@ -16,6 +16,7 @@ use PccPhpSdk\core\Query\Builder\Article\ArticlesListQueryBuilder;
 use PccPhpSdk\core\Query\QueryInterface;
 
 use function htmlspecialchars;
+use function is_array;
 
 /**
  * Article Loader.
@@ -158,8 +159,10 @@ class ArticleLoader implements ArticleLoaderInterface
                     $article->{$field} = $data[$field] ?: [];
                     break;
 
-                case 'content':
                 case 'snippet':
+                    $article->{$field} = $data[$field] ? $this->parseMarkdownToHtml($data[$field]) : '';
+                    break;
+                case 'content':
                     if (!$data[$field]) {
                         $article->{$field} = '';
                         break;
@@ -179,6 +182,24 @@ class ArticleLoader implements ArticleLoaderInterface
     }
 
     /**
+     * Convert markdown format to html.
+     *
+     * @param string $content
+     *   The markdown string.
+     *
+     * @return string
+     *   Returns the html string.
+     */
+    private function parseMarkdownToHtml(string $content): string
+    {
+        // Replace all occurrences of the pattern `{#h\..*}\n` with `\n`.
+        $pattern = '/{#h\..*}\n/';
+        $content = preg_replace($pattern, "\n", $content);
+        $parsedown = new Parsedown();
+        return $parsedown->text($content);
+    }
+
+    /**
      * Parse TREE_PANTHEON_V2 response data to HTML.
      *
      * @param string $content
@@ -188,6 +209,7 @@ class ArticleLoader implements ArticleLoaderInterface
     private function parseTreeToHtml(string $content): string
     {
         $array = json_decode($content, true);
+        $array = is_array($array) ? $array : [];
         $class = 'scoped-' . substr(md5(mt_rand()), 0, 9);
         $html = '';
         $this->processNode($array, $html, $class);
@@ -286,24 +308,6 @@ class ArticleLoader implements ArticleLoaderInterface
         $element .= '</' . $tag . '>';
 
         return $element;
-    }
-
-    /**
-     * Convert markdown format to html.
-     *
-     * @param string $content
-     *   The markdown string.
-     *
-     * @return string
-     *   Returns the html string.
-     */
-    private function parseMarkdownToHtml(string $content): string
-    {
-        // Replace all occurrences of the pattern `{#h\..*}\n` with `\n`.
-        $pattern = '/{#h\..*}\n/';
-        $content = preg_replace($pattern, "\n", $content);
-        $parsedown = new Parsedown();
-        return $parsedown->text($content);
     }
 
     /**
