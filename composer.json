@@ -1,8 +1,8 @@
 {
-  "name": "digitalpolygon/pcc-php-sdk",
+  "name": "pantheon-systems/pcc-php-sdk",
   "description": "SDK Library for PCC Integration.",
   "type": "library",
-  "homepage": "https://github.com/digitalpolygon/pcc-php-sdk/",
+  "homepage": "https://github.com/pantheon-systems/pcc-php-sdk/",
   "require": {
     "php": ">=8",
     "guzzlehttp/guzzle": "^7.8",
