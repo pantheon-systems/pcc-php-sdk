@@ -1,0 +1,18 @@
+# https://backstage.io/docs/features/software-catalog/
+# https://backstage.io/docs/features/software-catalog/descriptor-format
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pantheon content cloud phk sdk
+  description: sdk for pantheon site development with php
+  annotations:
+    backstage.io/techdocs-ref: dir:docs/
+    github.com/project-slug: @pantheon-systems/pcc-php-sdk
+    github.com/team-slug: @pantheon-systems/pcc
+tags:
+    - php
+spec:
+  type: library
+  lifecycle: Introduction
+  owner: content-cloud
