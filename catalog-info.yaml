@@ -8,10 +8,8 @@ metadata:
   description: sdk for pantheon site development with php
   annotations:
     pantheon.io/service-catalog/subdir: /
-    github.com/project-slug: @pantheon-systems/pcc-php-sdk
-    github.com/team-slug: @pantheon-systems/pcc
-tags:
-    - php
+    github.com/project-slug: pantheon-systems/pcc-php-sdk
+    github.com/team-slug: pantheon-systems/pcc
 spec:
   type: library
   lifecycle: Introduction
