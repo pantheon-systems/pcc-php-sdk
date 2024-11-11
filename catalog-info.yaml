@@ -5,7 +5,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: pantheon-content-cloud-phk-sdk
-  description: sdk for pantheon site development with php
+  description: sdk for pcc site development with php
   annotations:
     pantheon.io/service-catalog/subdir: /
     github.com/project-slug: pantheon-systems/pcc-php-sdk
