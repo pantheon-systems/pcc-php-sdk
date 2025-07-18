@@ -58,16 +58,20 @@ class ArticlesManager {
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
    *    The publishing Level.
+   * @param ContentType|null $contentType
+   *   The content type.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null): ?Article {
+  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
 	  return $this->articleLoader->loadById(...func_get_args());
   }
 
   /**
-   * Get Article bu slug.
+   * Get Article by Slug.
    *
    * @param string $slug
    *   Article slug.
@@ -75,12 +79,14 @@ class ArticlesManager {
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
    *    The publishing Level.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
-    return $this->articleLoader->loadBySlug($slug, $fields, $publishingLevel);
+  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
+    return $this->articleLoader->loadBySlug(...func_get_args());
   }
 
 }

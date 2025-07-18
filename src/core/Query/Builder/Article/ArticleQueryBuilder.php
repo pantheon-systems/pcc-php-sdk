@@ -44,6 +44,13 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   private ContentType $content_type = ContentType::TEXT_MARKDOWN;
 
   /**
+   * Version ID.
+   *
+   * @var string|null
+   */
+  private ?string $version_id = null;
+
+  /**
    * Add ID for filter in the query.
    *
    * @param string $id
@@ -102,6 +109,20 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
   }
 
   /**
+   * Set version ID.
+   *
+   * @param ?string $version_id
+   *   Version ID.
+   *
+   * @return QueryBuilderInterface
+   *   Return self.
+   */
+  public function setVersionId(?string $version_id): QueryBuilderInterface {
+    $this->version_id = $version_id;
+    return $this;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public function build(): QueryInterface {
@@ -146,6 +167,9 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
       $value[ArticleLoaderInterface::SLUG] = $this->slug;
     }
     $value[Variables::PUBLISHING_LEVEL] = $this->publishing_level;
+    if ($this->version_id !== null) {
+      $value[Variables::VERSION_ID] = $this->version_id;
+    }
 
     return new \ArrayObject($value);
   }
@@ -165,6 +189,9 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder {
       $variable = [ArticleLoaderInterface::SLUG => $this->buildSlugVariableDef()];
     }
     $variable[Variables::PUBLISHING_LEVEL] = $this->buildPublishingLevelVariableDef();
+    if ($this->version_id !== null) {
+      $variable[Variables::VERSION_ID] = Variables::getVariableDefinition(Variables::VERSION_ID);
+    }
 
     return $variable;
   }

@@ -49,7 +49,8 @@ class ArticleLoader implements ArticleLoaderInterface
         string $id,
         array $fields = [],
         PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
-        ?ContentType $contentType = null
+        ?ContentType $contentType = null,
+        ?string $versionId = null
     ): ?Article {
         $queryBuilder = new ArticleQueryBuilder();
         $queryBuilder->addFields($this->getFields($fields));
@@ -57,6 +58,9 @@ class ArticleLoader implements ArticleLoaderInterface
         $queryBuilder->setPublishingLevel($publishingLevel);
         if ($contentType) {
             $queryBuilder->setContentType($contentType);
+        }
+        if ($versionId) {
+            $queryBuilder->setVersionId($versionId);
         }
 
         $query = $queryBuilder->build();
@@ -316,12 +320,16 @@ class ArticleLoader implements ArticleLoaderInterface
     public function loadBySlug(
         string $slug,
         array $fields = [],
-        PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION
+        PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+        ?string $versionId = null
     ): ?Article {
         $queryBuilder = new ArticleQueryBuilder();
         $queryBuilder->addFields($this->getFields($fields));
         $queryBuilder->filterBySlug($slug);
         $queryBuilder->setPublishingLevel($publishingLevel);
+        if ($versionId) {
+            $queryBuilder->setVersionId($versionId);
+        }
 
         $query = $queryBuilder->build();
         $response = $this->sendRequest($query);

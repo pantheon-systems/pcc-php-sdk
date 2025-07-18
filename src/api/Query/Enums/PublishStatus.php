@@ -8,4 +8,5 @@ namespace PccPhpSdk\api\Query\Enums;
 enum PublishStatus: string {
   case PUBLISHED = 'published';
   case UNPUBLISHED = 'unpublished';
+  case DRAFT = 'draft';
 }
