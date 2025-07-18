@@ -18,7 +18,7 @@
     $articles = $articlesApi->getAllArticles($fields);
 ```
 
-Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the response.
 
 We receive response as object of PccPhpSdk\api\Response\PaginatedArticles which can be used further.
 
@@ -41,7 +41,7 @@ $fields = ['id', 'snippet', 'slug', 'title'];
 $paginatedArticles = $articlesApi->getAllArticles(new ArticleQueryArgs(), $searchArgs, $fields);
 ```
 
-Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the response.
 
 Here also we receive response as object of PccPhpSdk\api\Response\PaginatedArticles which can be used further.
 
@@ -59,7 +59,7 @@ $slug = 'slug-goes-here';
 $article2 = $articlesApi->getArticleBySlug($slug, $fields);
 ```
 
-Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the resposnse.
+Here `$fields` is optional. If we do not pass `$fields` to get the selective fields, then it will return default fields in the response.
 
 Here the response is PccPhpSdk\api\Response\Article.
 
