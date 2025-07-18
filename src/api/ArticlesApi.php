@@ -53,7 +53,7 @@ class ArticlesApi extends PccApi {
   /**
    * Get article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   The article id.
    * @param array $fields
    *   The Article fields.
@@ -69,8 +69,8 @@ class ArticlesApi extends PccApi {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
-    $article = $this->articlesManager->getArticleById($id, $fields, $publishingLevel, $contentType, $versionId);
+  public function getArticleById(string $articleId, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
+    $article = $this->articlesManager->getArticleById($articleId, $fields, $publishingLevel, $contentType, $versionId);
     return $article ? ResponseBuilder::toArticleResponse($article) : null;
   }
 

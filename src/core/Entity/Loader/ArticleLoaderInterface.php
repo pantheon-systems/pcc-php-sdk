@@ -27,7 +27,7 @@ interface ArticleLoaderInterface {
   /**
    * Load Article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   Article ID.
    * @param array $fields
    *   The Article fields.
@@ -41,7 +41,7 @@ interface ArticleLoaderInterface {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity or null.
    */
-  public function loadById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article;
+  public function loadById(string $articleId, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article;
 
   /**
    * Load Article by slug.

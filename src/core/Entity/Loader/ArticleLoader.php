@@ -42,19 +42,20 @@ class ArticleLoader implements ArticleLoaderInterface
         $this->pccClient = $pccClient;
     }
 
+
     /**
      * {@inheritDoc}
      */
     public function loadById(
-        string $id,
-        array $fields = [],
+        string $articleId,
+        array $fields=[],
         PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
         ?ContentType $contentType = null,
         ?string $versionId = null
     ): ?Article {
         $queryBuilder = new ArticleQueryBuilder();
         $queryBuilder->addFields($this->getFields($fields));
-        $queryBuilder->filterById($id);
+        $queryBuilder->filterById($articleId);
         $queryBuilder->setPublishingLevel($publishingLevel);
         if ($contentType) {
             $queryBuilder->setContentType($contentType);
