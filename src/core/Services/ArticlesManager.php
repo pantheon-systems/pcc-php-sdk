@@ -66,7 +66,7 @@ class ArticlesManager {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
+  public function getArticleById(string $id, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
 	  return $this->articleLoader->loadById(...func_get_args());
   }
 
@@ -85,7 +85,7 @@ class ArticlesManager {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
    */
-  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
+  public function getArticleBySlug(string $slug, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
     return $this->articleLoader->loadBySlug(...func_get_args());
   }
 

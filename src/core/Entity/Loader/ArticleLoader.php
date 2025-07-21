@@ -320,7 +320,7 @@ class ArticleLoader implements ArticleLoaderInterface
      */
     public function loadBySlug(
         string $slug,
-        array $fields = [],
+        array $fields=[],
         PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
         ?string $versionId = null
     ): ?Article {
