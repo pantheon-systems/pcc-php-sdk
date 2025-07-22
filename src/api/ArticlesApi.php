@@ -45,7 +45,7 @@ class ArticlesApi extends PccApi {
    * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function getAllArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): PaginatedArticles {
+  public function getAllArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields=[]): PaginatedArticles {
     $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs, $fields);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
@@ -53,21 +53,25 @@ class ArticlesApi extends PccApi {
   /**
    * Get article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   The article id.
    * @param array $fields
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
    *   The publishing level.
+   * @param ContentType|null $contentType
+   *   The content type.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null): ?Article {
-	$articleEntity = $this->articlesManager->getArticleById(...func_get_args());
-    return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
+  public function getArticleById(string $articleId, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
+    $article = $this->articlesManager->getArticleById($articleId, $fields, $publishingLevel, $contentType, $versionId);
+    return $article ? ResponseBuilder::toArticleResponse($article) : null;
   }
 
   /**
@@ -78,16 +82,18 @@ class ArticlesApi extends PccApi {
    * @param array $fields
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
-   *   The publishing Level.
+   *   The publishing level.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\api\Response\Article|null
    *   Return Article response object.
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article {
-    $articleEntity = $this->articlesManager->getArticleBySlug($slug, $fields, $publishingLevel);
-    return $articleEntity ? ResponseBuilder::toArticleResponse($articleEntity) : NULL;
+  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
+    $article = $this->articlesManager->getArticleBySlug($slug, $fields, $publishingLevel, $versionId);
+    return $article ? ResponseBuilder::toArticleResponse($article) : null;
   }
 
 }

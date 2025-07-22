@@ -19,6 +19,7 @@ class Variables {
   public const CONTENT_TYPE = 'contentType';
 
   public const PUBLISHING_LEVEL = 'publishingLevel';
+  public const VERSION_ID = 'versionId';
 
   /**
    * Get variable definition based on the field name.
@@ -53,6 +54,9 @@ class Variables {
 
       case self::PUBLISHING_LEVEL:
         return new Variable(self::PUBLISHING_LEVEL, 'PublishingLevel');
+
+      case self::VERSION_ID:
+        return new Variable(self::VERSION_ID, 'String');
 
       default:
         return NULL;

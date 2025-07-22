@@ -24,21 +24,27 @@ interface ArticleLoaderInterface {
    */
   public const SLUG = 'slug';
 
+
   /**
    * Load Article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   Article ID.
    * @param array $fields
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
    *     The publishing Level.
+   * @param ContentType|null $contentType
+   *   The content type.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity or null.
    */
-  public function loadById(string $id, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null): ?Article;
+  public function loadById(string $articleId, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article;
 
+  
   /**
    * Load Article by slug.
    *
@@ -48,11 +54,13 @@ interface ArticleLoaderInterface {
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
    *     The publishing Level.
+   * @param string|null $versionId
+   *   The version ID.
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article or null.
    */
-  public function loadBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION): ?Article;
+  public function loadBySlug(string $slug, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article;
 
   /**
    * Load All Articles based on Query and Search args.

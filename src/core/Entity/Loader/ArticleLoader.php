@@ -42,21 +42,26 @@ class ArticleLoader implements ArticleLoaderInterface
         $this->pccClient = $pccClient;
     }
 
+
     /**
      * {@inheritDoc}
      */
     public function loadById(
-        string $id,
-        array $fields = [],
+        string $articleId,
+        array $fields=[],
         PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
-        ?ContentType $contentType = null
+        ?ContentType $contentType = null,
+        ?string $versionId = null
     ): ?Article {
         $queryBuilder = new ArticleQueryBuilder();
         $queryBuilder->addFields($this->getFields($fields));
-        $queryBuilder->filterById($id);
+        $queryBuilder->filterById($articleId);
         $queryBuilder->setPublishingLevel($publishingLevel);
         if ($contentType) {
             $queryBuilder->setContentType($contentType);
+        }
+        if ($versionId) {
+            $queryBuilder->setVersionId($versionId);
         }
 
         $query = $queryBuilder->build();
@@ -315,13 +320,17 @@ class ArticleLoader implements ArticleLoaderInterface
      */
     public function loadBySlug(
         string $slug,
-        array $fields = [],
-        PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION
+        array $fields=[],
+        PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+        ?string $versionId = null
     ): ?Article {
         $queryBuilder = new ArticleQueryBuilder();
         $queryBuilder->addFields($this->getFields($fields));
         $queryBuilder->filterBySlug($slug);
         $queryBuilder->setPublishingLevel($publishingLevel);
+        if ($versionId) {
+            $queryBuilder->setVersionId($versionId);
+        }
 
         $query = $queryBuilder->build();
         $response = $this->sendRequest($query);
