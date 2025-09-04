@@ -7,7 +7,8 @@ namespace PccPhpSdk\core\Entity;
  *
  * Entity object containing Articles.
  */
-class ArticlesList {
+class ArticlesList
+{
   /**
    * Total number of articles.
    *
@@ -39,12 +40,13 @@ class ArticlesList {
    * @param int $cursor
    *   The current cursor.
    */
-  public function __construct(array $articles = [], $total = 20, int $cursor = NULL) {
+  public function __construct(array $articles = [], $total = 20, int $cursor = null)
+  {
     $this->articles = $articles;
     $this->total = $total;
-    if ($cursor === NULL) {
+    if ($cursor === null) {
       // Get the current Unix timestamp with microseconds.
-      $microtime = microtime(TRUE);
+      $microtime = microtime(true);
       // Convert to milliseconds.
       $this->cursor = round($microtime * 1000);
     }
@@ -54,12 +56,13 @@ class ArticlesList {
    * Add total count of articles.
    *
    * @param int $total
-   *   The toal cont.
+   *   The total cont.
    *
    * @return void
    *   Nothing.
    */
-  public function addTotalArticlesCount(int $total): void {
+  public function addTotalArticlesCount(int $total): void
+  {
     $this->total = $total;
   }
 
@@ -72,7 +75,8 @@ class ArticlesList {
    * @return void
    *   Nothing.
    */
-  public function addPageCursor(int $cursor): void {
+  public function addPageCursor(int $cursor): void
+  {
     $this->cursor = $cursor;
   }
 
@@ -85,8 +89,8 @@ class ArticlesList {
    * @return void
    *   Nothing.
    */
-  public function addArticle(Article $article): void {
+  public function addArticle(Article $article): void
+  {
     $this->articles[] = $article;
   }
-
 }

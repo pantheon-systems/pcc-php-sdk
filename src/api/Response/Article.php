@@ -8,8 +8,8 @@ namespace PccPhpSdk\api\Response;
  * Response object containing Article data.
  */
 #[\AllowDynamicProperties]
-class Article {
-
+class Article
+{
   /**
    * Article ID.
    *

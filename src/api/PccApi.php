@@ -7,8 +7,8 @@ use PccPhpSdk\core\PccClient;
 /**
  * PccAPI class providing underlying required functionalities for APIs.
  */
-abstract class PccApi {
-
+abstract class PccApi
+{
   /**
    *  PccClient.
    *
@@ -22,7 +22,8 @@ abstract class PccApi {
    * @param PccClient $pccClient
    *   Preconfigured PccClient
    */
-  public function __construct(PccClient $pccClient) {
+  public function __construct(PccClient $pccClient)
+  {
     $this->pccClient = $pccClient;
   }
 }

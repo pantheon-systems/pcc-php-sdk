@@ -16,8 +16,8 @@ use PccPhpSdk\core\Query\QueryInterface;
 /**
  * Articles List Query Builder to get multiple articles.
  */
-class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
-
+class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder
+{
   /**
    * Filter inputs for querying articles.
    *
@@ -68,7 +68,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return QueryInterface
    *   The built query.
    */
-  public function build(): QueryInterface {
+  public function build(): QueryInterface
+  {
     $query = new Query('articles', $this->getQueryArgs());
     $query->use(...$this->fields);
     $parsedQuery = $query->root()->parse();
@@ -85,12 +86,13 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setFilter(ArticleSearchArgs $searchArgs): ArticlesListQueryBuilder {
+  public function setFilter(ArticleSearchArgs $searchArgs): ArticlesListQueryBuilder
+  {
     $this->filter = new ArticleFilterInput(
-      $searchArgs->bodyContains,
-      $searchArgs->tagContains,
-      $searchArgs->titleContains,
-      $searchArgs->publishStatus
+        $searchArgs->bodyContains,
+        $searchArgs->tagContains,
+        $searchArgs->titleContains,
+        $searchArgs->publishStatus
     );
     return $this;
   }
@@ -104,7 +106,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self.
    */
-  public function setQueryArgs(ArticleQueryArgs $queryArgs): ArticlesListQueryBuilder {
+  public function setQueryArgs(ArticleQueryArgs $queryArgs): ArticlesListQueryBuilder
+  {
     $this->contentType = $queryArgs->getContentType();
     $this->sortField = $queryArgs->getSortField();
     $this->sortOrder = $queryArgs->getSortOrder();
@@ -122,7 +125,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setSortField(ArticleSortField $sortField): ArticlesListQueryBuilder {
+  public function setSortField(ArticleSortField $sortField): ArticlesListQueryBuilder
+  {
     $this->sortField = $sortField;
     return $this;
   }
@@ -136,7 +140,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setSortOrder(ArticleSortOrder $sortOrder): ArticlesListQueryBuilder {
+  public function setSortOrder(ArticleSortOrder $sortOrder): ArticlesListQueryBuilder
+  {
     $this->sortOrder = $sortOrder;
     return $this;
   }
@@ -150,7 +155,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setPageSize(int $pageSize): ArticlesListQueryBuilder {
+  public function setPageSize(int $pageSize): ArticlesListQueryBuilder
+  {
     $this->pageSize = $pageSize;
     return $this;
   }
@@ -164,7 +170,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setPageIndex(int $pageIndex): ArticlesListQueryBuilder {
+  public function setPageIndex(int $pageIndex): ArticlesListQueryBuilder
+  {
     $this->pageIndex = $pageIndex;
     return $this;
   }
@@ -178,7 +185,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return $this
    *   Returns self for method chaining.
    */
-  public function setContentType(ContentType $contentType): ArticlesListQueryBuilder {
+  public function setContentType(ContentType $contentType): ArticlesListQueryBuilder
+  {
     $this->contentType = $contentType;
     return $this;
   }
@@ -189,7 +197,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return ArticleFilterInput|null
    *   Filter inputs for querying articles.
    */
-  public function getFilter(): ?ArticleFilterInput {
+  public function getFilter(): ?ArticleFilterInput
+  {
     return $this->filter;
   }
 
@@ -199,7 +208,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return ArticleSortField|null
    *   The sort field.
    */
-  public function getSortField(): ?ArticleSortField {
+  public function getSortField(): ?ArticleSortField
+  {
     return $this->sortField;
   }
 
@@ -209,7 +219,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return ArticleSortOrder|null
    *   The sort order.
    */
-  public function getSortOrder(): ?ArticleSortOrder {
+  public function getSortOrder(): ?ArticleSortOrder
+  {
     return $this->sortOrder;
   }
 
@@ -219,7 +230,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return int|null
    *   The number of articles per page.
    */
-  public function getPageSize(): ?int {
+  public function getPageSize(): ?int
+  {
     return $this->pageSize;
   }
 
@@ -229,7 +241,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return int|null
    *   The page index.
    */
-  public function getPageIndex(): ?int {
+  public function getPageIndex(): ?int
+  {
     return $this->pageIndex;
   }
 
@@ -239,7 +252,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return ContentType
    *   The content type.
    */
-  public function getContentType(): ContentType {
+  public function getContentType(): ContentType
+  {
     return $this->contentType;
   }
 
@@ -249,7 +263,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return array
    *   Returns query arguments.
    */
-  private function getQueryArgs(): array {
+  private function getQueryArgs(): array
+  {
     $args = [
       'contentType' => $this->contentType,
     ];
@@ -267,7 +282,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return Variable[]|null
    *   Return filter variable definitions or null.
    */
-  private function getVariableDef(): ?array {
+  private function getVariableDef(): ?array
+  {
     $variables = [];
 
     if ($this->filter !== null) {
@@ -298,7 +314,8 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
    * @return ArrayObject
    *   Returns variable mapped values.
    */
-  private function getVariableVal(): ArrayObject {
+  private function getVariableVal(): ArrayObject
+  {
     $value = [];
     if ($this->filter !== null) {
       $value[Variables::FILTER] = [
@@ -326,5 +343,4 @@ class ArticlesListQueryBuilder extends ArticleBaseQueryBuilder {
 
     return new ArrayObject($value);
   }
-
 }

@@ -15,8 +15,8 @@ use PccPhpSdk\core\Services\ArticlesManager;
 /**
  * Articles API to fetch articles.
  */
-class ArticlesApi extends PccApi {
-
+class ArticlesApi extends PccApi
+{
   /**
    * Internal Articles Manager Service.
    *
@@ -27,7 +27,8 @@ class ArticlesApi extends PccApi {
   /**
    * {@inheritDoc}
    */
-  public function __construct(PccClient $pccClient) {
+  public function __construct(PccClient $pccClient)
+  {
     parent::__construct($pccClient);
     $this->articlesManager = new ArticlesManager($pccClient);
   }
@@ -45,7 +46,11 @@ class ArticlesApi extends PccApi {
    * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   Returns articles list matching the search criterion as PaginatedArticles.
    */
-  public function getAllArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields=[]): PaginatedArticles {
+  public function getAllArticles(
+      ?ArticleQueryArgs $queryArgs = null,
+      ?ArticleSearchArgs $searchArgs = null,
+      array $fields = []
+  ): PaginatedArticles {
     $articles = $this->articlesManager->getArticles($queryArgs, $searchArgs, $fields);
     return ResponseBuilder::toPaginatedArticles($articles);
   }
@@ -69,7 +74,13 @@ class ArticlesApi extends PccApi {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleById(string $articleId, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
+  public function getArticleById(
+      string $articleId,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?ContentType $contentType = null,
+      ?string $versionId = null
+  ): ?Article {
     $article = $this->articlesManager->getArticleById($articleId, $fields, $publishingLevel, $contentType, $versionId);
     return $article ? ResponseBuilder::toArticleResponse($article) : null;
   }
@@ -91,9 +102,13 @@ class ArticlesApi extends PccApi {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function getArticleBySlug(string $slug, array $fields = [], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
+  public function getArticleBySlug(
+      string $slug,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?string $versionId = null
+  ): ?Article {
     $article = $this->articlesManager->getArticleBySlug($slug, $fields, $publishingLevel, $versionId);
     return $article ? ResponseBuilder::toArticleResponse($article) : null;
   }
-
 }

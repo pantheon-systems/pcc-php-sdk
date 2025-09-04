@@ -12,8 +12,8 @@ use PccPhpSdk\core\Entity\ArticlesList;
 /**
  * Article Loader Interface.
  */
-interface ArticleLoaderInterface {
-
+interface ArticleLoaderInterface
+{
   /**
    * ID identifier.
    */
@@ -29,11 +29,11 @@ interface ArticleLoaderInterface {
    * Load Article by ID.
    *
    * @param string $articleId
-   *   Article ID.
+   *   Article id.
    * @param array $fields
    *   The Article fields.
    * @param PublishingLevel $publishingLevel
-   *     The publishing Level.
+   *   The publishing Level.
    * @param ContentType|null $contentType
    *   The content type.
    * @param string|null $versionId
@@ -42,9 +42,15 @@ interface ArticleLoaderInterface {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity or null.
    */
-  public function loadById(string $articleId, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article;
+  public function loadById(
+      string $articleId,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?ContentType $contentType = null,
+      ?string $versionId = null
+  ): ?Article;
 
-  
+
   /**
    * Load Article by slug.
    *
@@ -60,7 +66,12 @@ interface ArticleLoaderInterface {
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article or null.
    */
-  public function loadBySlug(string $slug, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article;
+  public function loadBySlug(
+      string $slug,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?string $versionId = null
+  ): ?Article;
 
   /**
    * Load All Articles based on Query and Search args.
@@ -75,6 +86,9 @@ interface ArticleLoaderInterface {
    * @return \PccPhpSdk\core\Entity\ArticlesList
    *   ArticlesList containing all articles matching the criterion.
    */
-  public function loadAll(?ArticleQueryArgs $queryArgs, ?ArticleSearchArgs $searchArgs, array $fields = []): ArticlesList;
-
+  public function loadAll(
+      ?ArticleQueryArgs $queryArgs,
+      ?ArticleSearchArgs $searchArgs,
+      array $fields = []
+  ): ArticlesList;
 }

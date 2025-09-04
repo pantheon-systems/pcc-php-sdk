@@ -10,8 +10,8 @@ use PccPhpSdk\Exception\PccClientException;
 /**
  * PccClient Class.
  */
-class PccClient {
-
+class PccClient
+{
   /**
    * PCC Token Header.
    */
@@ -27,7 +27,8 @@ class PccClient {
   /**
    * @param PccClientConfig $clientConfig
    */
-  public function __construct(PccClientConfig $clientConfig) {
+  public function __construct(PccClientConfig $clientConfig)
+  {
     $this->clientConfig = $clientConfig;
   }
 
@@ -42,7 +43,8 @@ class PccClient {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function executeQuery(QueryInterface $query): mixed {
+  public function executeQuery(QueryInterface $query): mixed
+  {
     return $this->sendRequest($query->toRequestBody());
   }
 
@@ -57,15 +59,15 @@ class PccClient {
    *
    * @throws \PccPhpSdk\Exception\PccClientException
    */
-  public function sendRequest(bool|string $body): mixed {
+  public function sendRequest(bool|string $body): mixed
+  {
     $client = new Client();
     $headers = $this->getHeaders();
     $request = new Request('POST', $this->getUrl(), $headers, $body);
     try {
       $response = $client->sendAsync($request)->wait();
-    }
-    catch (\Exception $e) {
-      throw new PccClientException($e->getMessage(), $request, NULL, $e);
+    } catch (\Exception $e) {
+      throw new PccClientException($e->getMessage(), $request, null, $e);
     }
     return $response->getBody()->getContents();
   }
@@ -76,7 +78,8 @@ class PccClient {
    * @return array
    *   Array of headers and the corresponding values.
    */
-  private function getHeaders(): array {
+  private function getHeaders(): array
+  {
     return [
       'Content-Type' => 'application/json',
       self::PCC_TOKEN_HEADER => $this->clientConfig->getSiteToken(),
@@ -89,8 +92,8 @@ class PccClient {
    * @return string
    *   PCC API URL string.
    */
-  private function getUrl(): string {
+  private function getUrl(): string
+  {
     return $this->clientConfig->getPccHost() . 'sites/' . $this->clientConfig->getSiteId() . '/query';
   }
-
 }

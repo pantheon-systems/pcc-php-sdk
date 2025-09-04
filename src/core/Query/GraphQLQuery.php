@@ -5,8 +5,8 @@ namespace PccPhpSdk\core\Query;
 /**
  * GraphQL Query class.
  */
-class GraphQLQuery implements QueryInterface {
-
+class GraphQLQuery implements QueryInterface
+{
   /**
    * Query string.
    *
@@ -21,7 +21,8 @@ class GraphQLQuery implements QueryInterface {
    */
   private \ArrayObject $variables;
 
-  public function __construct(string $query, \ArrayObject $variables = new \ArrayObject()) {
+  public function __construct(string $query, \ArrayObject $variables = new \ArrayObject())
+  {
     $this->query = $query;
     $this->variables = $variables;
   }
@@ -29,7 +30,8 @@ class GraphQLQuery implements QueryInterface {
   /**
    * {@inheritDoc}
    */
-  public function toRequestBody(): string {
+  public function toRequestBody(): string
+  {
     $data = [
       'query' => $this->query,
       'variables' => $this->variables,
@@ -46,7 +48,8 @@ class GraphQLQuery implements QueryInterface {
    * @return void
    *   Returns void.
    */
-  public function setQuery(string $query): void {
+  public function setQuery(string $query): void
+  {
     $this->query = $query;
   }
 
@@ -59,8 +62,8 @@ class GraphQLQuery implements QueryInterface {
    * @return void
    *   Returns void.
    */
-  public function setVariables(array $variables): void {
+  public function setVariables(array $variables): void
+  {
     $this->variables = new \ArrayObject($variables);
   }
-
 }
