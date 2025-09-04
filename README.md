@@ -144,3 +144,34 @@ $article2 = $articlesApi->getArticleById($id, $fields, $publishingLevel);
 $versionId = 'version-id-here';
 $article3 = $articlesApi->getArticleById($id, $fields, $publishingLevel, null, $versionId);
 ```
+
+## Status
+
+```php
+use PccPhpSdk\core\PccClientConfig;
+use PccPhpSdk\core\Status\Status;
+use PccPhpSdk\core\Status\StatusLevel;
+use PccPhpSdk\core\Status\StatusOptions;
+
+$config = new PccClientConfig('--site-id--', '--site-token--');
+$options = new StatusOptions(
+  smartComponents: true,
+  smartComponentsCount: 7,
+  smartComponentPreview: true,
+  metadataGroups: false,
+  metadataGroupIdentifiers: null,
+  resolvePathConfigured: true,
+  notFoundPath: '/404'
+);
+
+$status = new Status($config, $options);
+$platformStatus = $status->withPlatform([
+  'name' => 'wordpress',
+  'version' => '6.6.2',
+  'sdk' => ['name' => 'pcc-wp-sdk', 'version' => 'x.x.x'],
+]);
+
+$payload = $platformStatus->toArray();
+
+// return json_encode($payload);
+```
