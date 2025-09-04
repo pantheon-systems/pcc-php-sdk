@@ -14,34 +14,34 @@ use PccPhpSdk\core\Entity\ArticlesList;
  */
 interface ArticleLoaderInterface
 {
-  /**
-   * ID identifier.
-   */
+    /**
+     * ID identifier.
+     */
   public const ID = 'id';
 
-  /**
-   * Slug identifier.
-   */
+    /**
+     * Slug identifier.
+     */
   public const SLUG = 'slug';
 
 
-  /**
-   * Load Article by ID.
-   *
-   * @param string $articleId
-   *   Article id.
-   * @param array $fields
-   *   The Article fields.
-   * @param PublishingLevel $publishingLevel
-   *   The publishing Level.
-   * @param ContentType|null $contentType
-   *   The content type.
-   * @param string|null $versionId
-   *   The version ID.
-   *
-   * @return \PccPhpSdk\core\Entity\Article|null
-   *   Article Entity or null.
-   */
+    /**
+     * Load Article by ID.
+     *
+     * @param string $articleId
+     *   Article id.
+     * @param array $fields
+     *   The Article fields.
+     * @param PublishingLevel $publishingLevel
+     *   The publishing Level.
+     * @param ContentType|null $contentType
+     *   The content type.
+     * @param string|null $versionId
+     *   The version ID.
+     *
+     * @return \PccPhpSdk\core\Entity\Article|null
+     *   Article Entity or null.
+     */
   public function loadById(
       string $articleId,
       array $fields = [],
@@ -51,21 +51,21 @@ interface ArticleLoaderInterface
   ): ?Article;
 
 
-  /**
-   * Load Article by slug.
-   *
-   * @param string $slug
-   *   Article slug.
-   * @param array $fields
-   *   The Article fields.
-   * @param PublishingLevel $publishingLevel
-   *     The publishing Level.
-   * @param string|null $versionId
-   *   The version ID.
-   *
-   * @return \PccPhpSdk\core\Entity\Article|null
-   *   Article or null.
-   */
+    /**
+     * Load Article by slug.
+     *
+     * @param string $slug
+     *   Article slug.
+     * @param array $fields
+     *   The Article fields.
+     * @param PublishingLevel $publishingLevel
+     *     The publishing Level.
+     * @param string|null $versionId
+     *   The version ID.
+     *
+     * @return \PccPhpSdk\core\Entity\Article|null
+     *   Article or null.
+     */
   public function loadBySlug(
       string $slug,
       array $fields = [],
@@ -73,19 +73,19 @@ interface ArticleLoaderInterface
       ?string $versionId = null
   ): ?Article;
 
-  /**
-   * Load All Articles based on Query and Search args.
-   *
-   * @param \PccPhpSdk\api\Query\ArticleQueryArgs|null $queryArgs
-   *   Article Query Args.
-   * @param \PccPhpSdk\api\Query\ArticleSearchArgs|null $searchArgs
-   *   Article Search Args.
-   * @param array $fields
-   *   The Article fields.
-   *
-   * @return \PccPhpSdk\core\Entity\ArticlesList
-   *   ArticlesList containing all articles matching the criterion.
-   */
+    /**
+     * Load All Articles based on Query and Search args.
+     *
+     * @param \PccPhpSdk\api\Query\ArticleQueryArgs|null $queryArgs
+     *   Article Query Args.
+     * @param \PccPhpSdk\api\Query\ArticleSearchArgs|null $searchArgs
+     *   Article Search Args.
+     * @param array $fields
+     *   The Article fields.
+     *
+     * @return \PccPhpSdk\core\Entity\ArticlesList
+     *   ArticlesList containing all articles matching the criterion.
+     */
   public function loadAll(
       ?ArticleQueryArgs $queryArgs,
       ?ArticleSearchArgs $searchArgs,

@@ -57,7 +57,7 @@ class ArticlesManager
   /**
    * Get Article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   Article ID.
    * @param array $fields
    *   The Article fields.
@@ -70,9 +70,11 @@ class ArticlesManager
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
+   *
+   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
    */
   public function getArticleById(
-      string $id,
+      string $articleId,
       array $fields = [],
       PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
       ?ContentType $contentType = null,
@@ -84,7 +86,7 @@ class ArticlesManager
   /**
    * Get Article by Slug.
    *
-   * @param string $slug
+   * @param string $articleSlug
    *   Article slug.
    * @param array $fields
    *   The Article fields.
@@ -95,9 +97,11 @@ class ArticlesManager
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
+   *
+   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
    */
   public function getArticleBySlug(
-      string $slug,
+      string $articleSlug,
       array $fields = [],
       PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
       ?string $versionId = null

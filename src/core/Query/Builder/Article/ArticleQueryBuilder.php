@@ -21,14 +21,14 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder
    *
    * @var string|null
    */
-  private ?string $id = null;
+  private ?string $articleId = null;
 
   /**
    * Article Slug to filter.
    *
    * @var string|null
    */
-  private ?string $slug = null;
+  private ?string $articleSlug = null;
 
   /**
    * Publishing Level.
@@ -54,15 +54,15 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder
   /**
    * Add ID for filter in the query.
    *
-   * @param string $id
+   * @param string $articleId
    *   ID value.
    *
    * @return \PccPhpSdk\core\Query\Builder\QueryBuilderInterface
    *   Returns self.
    */
-  public function filterById(string $id): QueryBuilderInterface
+  public function filterById(string $articleId): QueryBuilderInterface
   {
-    $this->id = $id;
+    $this->articleId = $articleId;
     return $this;
   }
 
@@ -71,15 +71,15 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder
    *
    * If ID filter already present, that will take precedence.
    *
-   * @param string $slug
+   * @param string $articleSlug
    *   Slug Value.
    *
    * @return \PccPhpSdk\core\Query\Builder\QueryBuilderInterface
    *   Returns self.
    */
-  public function filterBySlug(string $slug): QueryBuilderInterface
+  public function filterBySlug(string $articleSlug): QueryBuilderInterface
   {
-    $this->slug = $slug;
+    $this->articleSlug = $articleSlug;
     return $this;
   }
 
@@ -169,10 +169,10 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder
   private function getVariableVal(): \ArrayObject
   {
     $value = [];
-    if ($this->id !== null) {
-      $value[ArticleLoaderInterface::ID] = $this->id;
-    } elseif ($this->slug !== null) {
-      $value[ArticleLoaderInterface::SLUG] = $this->slug;
+    if ($this->articleId !== null) {
+      $value[ArticleLoaderInterface::ID] = $this->articleId;
+    } elseif ($this->articleSlug !== null) {
+      $value[ArticleLoaderInterface::SLUG] = $this->articleSlug;
     }
     $value[Variables::PUBLISHING_LEVEL] = $this->publishing_level;
     if ($this->version_id !== null) {
@@ -191,9 +191,9 @@ class ArticleQueryBuilder extends ArticleBaseQueryBuilder
   private function getVariableDef(): ?array
   {
     $variable = null;
-    if ($this->id !== null) {
+    if ($this->articleId !== null) {
       $variable = [ArticleLoaderInterface::ID => $this->buildIdVariableDef()];
-    } elseif ($this->slug !== null) {
+    } elseif ($this->articleSlug !== null) {
       $variable = [ArticleLoaderInterface::SLUG => $this->buildSlugVariableDef()];
     }
     $variable[Variables::PUBLISHING_LEVEL] = $this->buildPublishingLevelVariableDef();
