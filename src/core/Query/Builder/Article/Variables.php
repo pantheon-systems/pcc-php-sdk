@@ -9,8 +9,8 @@ use GraphQL\Entities\Variable;
  *
  * Defines constants and methods to handle variable definitions for GraphQL queries.
  */
-class Variables {
-
+class Variables
+{
   public const FILTER = 'filter';
   public const PAGE_SIZE = 'pageSize';
   public const SORT_FIELD = 'sortBy';
@@ -32,35 +32,35 @@ class Variables {
    * @return \GraphQL\Entities\Variable|null
    *   Returns the variable definition or null if the field name is invalid.
    */
-  public static function getVariableDefinition(string $fieldName, string $defaultValue = ''): ?Variable {
+  public static function getVariableDefinition(string $fieldName, string $defaultValue = ''): ?Variable
+  {
     switch ($fieldName) {
       case self::FILTER:
-        return new Variable(self::FILTER, 'ArticleFilterInput');
+          return new Variable(self::FILTER, 'ArticleFilterInput');
 
       case self::PAGE_SIZE:
-        return new Variable(self::PAGE_SIZE, 'Int');
+          return new Variable(self::PAGE_SIZE, 'Int');
 
       case self::SORT_FIELD:
-        return new Variable(self::SORT_FIELD, 'ArticleSortField');
+          return new Variable(self::SORT_FIELD, 'ArticleSortField');
 
       case self::SORT_ORDER:
-        return new Variable(self::SORT_ORDER, 'SortOrder');
+          return new Variable(self::SORT_ORDER, 'SortOrder');
 
       case self::PAGE_INDEX:
-        return new Variable(self::PAGE_INDEX, 'Float');
+          return new Variable(self::PAGE_INDEX, 'Float');
 
       case self::CONTENT_TYPE:
-        return new Variable(self::CONTENT_TYPE, 'ContentType', $defaultValue);
+          return new Variable(self::CONTENT_TYPE, 'ContentType', $defaultValue);
 
       case self::PUBLISHING_LEVEL:
-        return new Variable(self::PUBLISHING_LEVEL, 'PublishingLevel');
+          return new Variable(self::PUBLISHING_LEVEL, 'PublishingLevel');
 
       case self::VERSION_ID:
-        return new Variable(self::VERSION_ID, 'String');
+          return new Variable(self::VERSION_ID, 'String');
 
       default:
-        return NULL;
+          return null;
     }
   }
-
 }

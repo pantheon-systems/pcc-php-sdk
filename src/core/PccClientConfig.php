@@ -5,8 +5,8 @@ namespace PccPhpSdk\core;
 /**
  * Pcc Client Configurations.
  */
-class PccClientConfig {
-
+class PccClientConfig
+{
   /**
    * Default PCC Host URL.
    */
@@ -52,7 +52,8 @@ class PccClientConfig {
    * @param string|null $pccGrant
    *   Pcc Grant.
    */
-  public function __construct(string $siteId, string $siteToken, string $pccHost = null, string $pccGrant = null) {
+  public function __construct(string $siteId, string $siteToken, string $pccHost = null, string $pccGrant = null)
+  {
     $this->siteId = $siteId;
     $this->siteToken = $siteToken;
     $this->pccHost = $pccHost ?? self::PCC_HOST_DEFAULT;
@@ -65,7 +66,8 @@ class PccClientConfig {
    * @return string
    *   PCC Host URL string.
    */
-  public function getPccHost() : string {
+  public function getPccHost(): string
+  {
     return $this->pccHost;
   }
 
@@ -75,7 +77,8 @@ class PccClientConfig {
    * @return string
    *   PCC Site ID.
    */
-  public function getSiteId() : string {
+  public function getSiteId(): string
+  {
     return $this->siteId;
   }
 
@@ -85,7 +88,8 @@ class PccClientConfig {
    * @return string
    *   PCC Site Token
    */
-  public function getSiteToken() : string {
+  public function getSiteToken(): string
+  {
     return !empty($this->siteToken) ? $this->siteToken : $this->getPCCGrant();
   }
 
@@ -95,10 +99,11 @@ class PccClientConfig {
    * @return string
    *   PCC grant string.
    */
-  private function getPCCGrant() : string {
+  private function getPCCGrant(): string
+  {
     $pccGrant = $this->pccGrant;
     if (!empty($pccGrant) && !str_contains('pcc_grant', $pccGrant)) {
-     $pccGrant = "pcc_grant $pccGrant";
+      $pccGrant = "pcc_grant $pccGrant";
     }
 
     return $pccGrant ?? '';

@@ -13,8 +13,8 @@ use PccPhpSdk\api\Query\Enums\ContentType;
  *
  * @package PccPhpSdk\api\Query
  */
-class ArticleQueryArgs {
-
+class ArticleQueryArgs
+{
   /**
    * The type of content to query.
    *
@@ -65,11 +65,11 @@ class ArticleQueryArgs {
    *   The type of content to query.
    */
   public function __construct(
-    ArticleSortField $sortField = ArticleSortField::UPDATED_AT,
-    ArticleSortOrder $sortOrder = ArticleSortOrder::DESC,
-    int $pageSize = 10,
-    int $pageIndex = 1,
-    ContentType $contentType = ContentType::TEXT_MARKDOWN,
+      ArticleSortField $sortField = ArticleSortField::UPDATED_AT,
+      ArticleSortOrder $sortOrder = ArticleSortOrder::DESC,
+      int $pageSize = 10,
+      int $pageIndex = 1,
+      ContentType $contentType = ContentType::TEXT_MARKDOWN,
   ) {
     $this->contentType = $contentType;
     $this->sortField = $sortField;
@@ -84,7 +84,8 @@ class ArticleQueryArgs {
    * @param ContentType $contentType
    *   The type of content to query.
    */
-  public function setContentType(ContentType $contentType): void {
+  public function setContentType(ContentType $contentType): void
+  {
     $this->contentType = $contentType;
   }
 
@@ -94,7 +95,8 @@ class ArticleQueryArgs {
    * @param ArticleSortField $sortField
    *   The field by which to sort the articles.
    */
-  public function setSortField(ArticleSortField $sortField): void {
+  public function setSortField(ArticleSortField $sortField): void
+  {
     $this->sortField = $sortField;
   }
 
@@ -104,7 +106,8 @@ class ArticleQueryArgs {
    * @param ArticleSortOrder $sortOrder
    *   The order in which to sort the articles.
    */
-  public function setSortOrder(ArticleSortOrder $sortOrder): void {
+  public function setSortOrder(ArticleSortOrder $sortOrder): void
+  {
     $this->sortOrder = $sortOrder;
   }
 
@@ -114,7 +117,8 @@ class ArticleQueryArgs {
    * @param int $pageSize
    *   The number of articles per page.
    */
-  public function setPageSize(int $pageSize): void {
+  public function setPageSize(int $pageSize): void
+  {
     $this->pageSize = $pageSize;
   }
 
@@ -124,7 +128,8 @@ class ArticleQueryArgs {
    * @param int $pageIndex
    *   The index of the page to retrieve.
    */
-  public function setPageIndex(int $pageIndex): void {
+  public function setPageIndex(int $pageIndex): void
+  {
     $this->pageIndex = $pageIndex;
   }
 
@@ -134,7 +139,8 @@ class ArticleQueryArgs {
    * @return ContentType
    *   The type of content to query.
    */
-  public function getContentType(): ContentType {
+  public function getContentType(): ContentType
+  {
     return $this->contentType;
   }
 
@@ -144,7 +150,8 @@ class ArticleQueryArgs {
    * @return ArticleSortField
    *   The field by which to sort the articles.
    */
-  public function getSortField(): ArticleSortField {
+  public function getSortField(): ArticleSortField
+  {
     return $this->sortField;
   }
 
@@ -154,7 +161,8 @@ class ArticleQueryArgs {
    * @return ArticleSortOrder
    *   The order in which to sort the articles.
    */
-  public function getSortOrder(): ArticleSortOrder {
+  public function getSortOrder(): ArticleSortOrder
+  {
     return $this->sortOrder;
   }
 
@@ -164,7 +172,8 @@ class ArticleQueryArgs {
    * @return int
    *   The number of articles per page.
    */
-  public function getPageSize(): int {
+  public function getPageSize(): int
+  {
     return $this->pageSize;
   }
 
@@ -174,8 +183,8 @@ class ArticleQueryArgs {
    * @return int
    *   The index of the page to retrieve.
    */
-  public function getPageIndex(): int {
+  public function getPageIndex(): int
+  {
     return $this->pageIndex;
   }
-
 }

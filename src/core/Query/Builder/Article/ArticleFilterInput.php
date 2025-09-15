@@ -11,8 +11,8 @@ use PccPhpSdk\api\Query\Enums\PublishStatus;
  *
  * @package PccPhpSdk\core\Query\Builder\Article
  */
-class ArticleFilterInput {
-
+class ArticleFilterInput
+{
   /**
    * @var string $bodyContains
    *   The string to search for within the body of articles.
@@ -54,7 +54,12 @@ class ArticleFilterInput {
    * @param PublishStatus $publishStatus
    *   The publishing status to filter articles by.
    */
-  public function __construct(string $bodyContains, string $tagContains, string $titleContains, PublishStatus $publishStatus) {
+  public function __construct(
+      string $bodyContains,
+      string $tagContains,
+      string $titleContains,
+      PublishStatus $publishStatus
+  ) {
     $this->bodyContains = $bodyContains;
     $this->tagContains = $tagContains;
     $this->titleContains = $titleContains;
@@ -67,7 +72,8 @@ class ArticleFilterInput {
    * @param string $bodyContains
    *   The string to search for within the body of articles.
    */
-  public function setBodyContains(string $bodyContains): void {
+  public function setBodyContains(string $bodyContains): void
+  {
     $this->bodyContains = $bodyContains;
   }
 
@@ -77,7 +83,8 @@ class ArticleFilterInput {
    * @param string $tagContains
    *   The string to search for within the tags of articles.
    */
-  public function setTagContains(string $tagContains): void {
+  public function setTagContains(string $tagContains): void
+  {
     $this->tagContains = $tagContains;
   }
 
@@ -87,7 +94,8 @@ class ArticleFilterInput {
    * @param string $titleContains
    *   The string to search for within the title of articles.
    */
-  public function setTitleContains(string $titleContains): void {
+  public function setTitleContains(string $titleContains): void
+  {
     $this->titleContains = $titleContains;
   }
 
@@ -97,7 +105,8 @@ class ArticleFilterInput {
    * @param PublishStatus $publishStatus
    *   The publishing status to filter articles by.
    */
-  public function setPublishStatus(PublishStatus $publishStatus): void {
+  public function setPublishStatus(PublishStatus $publishStatus): void
+  {
     $this->publishStatus = $publishStatus;
   }
 
@@ -107,7 +116,8 @@ class ArticleFilterInput {
    * @return string
    *   The string to search for within the body of articles.
    */
-  public function getBodyContains(): string {
+  public function getBodyContains(): string
+  {
     return $this->bodyContains;
   }
 
@@ -117,7 +127,8 @@ class ArticleFilterInput {
    * @return string
    *   The string to search for within the tags of articles.
    */
-  public function getTagContains(): string {
+  public function getTagContains(): string
+  {
     return $this->tagContains;
   }
 
@@ -127,7 +138,8 @@ class ArticleFilterInput {
    * @return string
    *   The string to search for within the title of articles.
    */
-  public function getTitleContains(): string {
+  public function getTitleContains(): string
+  {
     return $this->titleContains;
   }
 
@@ -137,9 +149,8 @@ class ArticleFilterInput {
    * @return PublishStatus
    *   The publishing status to filter articles by.
    */
-  public function getPublishStatus(): PublishStatus {
+  public function getPublishStatus(): PublishStatus
+  {
     return $this->publishStatus;
   }
-
 }
-

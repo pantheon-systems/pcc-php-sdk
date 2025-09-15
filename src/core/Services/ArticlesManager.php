@@ -15,8 +15,8 @@ use PccPhpSdk\core\PccClient;
 /**
  * Articles Manager service.
  */
-class ArticlesManager {
-
+class ArticlesManager
+{
   /**
    * Article Loader.
    *
@@ -30,7 +30,8 @@ class ArticlesManager {
    * @param \PccPhpSdk\core\PccClient $pccClient
    *   Preconfigured PccClient.
    */
-  public function __construct(PccClient $pccClient) {
+  public function __construct(PccClient $pccClient)
+  {
     $this->articleLoader = new ArticleLoader($pccClient);
   }
 
@@ -45,14 +46,18 @@ class ArticlesManager {
    * @return \PccPhpSdk\core\Entity\ArticlesList
    *   ArticlesList containing matching articles.
    */
-  public function getArticles(?ArticleQueryArgs $queryArgs = NULL, ?ArticleSearchArgs $searchArgs = NULL, array $fields = []): ArticlesList {
+  public function getArticles(
+      ?ArticleQueryArgs $queryArgs = null,
+      ?ArticleSearchArgs $searchArgs = null,
+      array $fields = []
+  ): ArticlesList {
     return $this->articleLoader->loadAll($queryArgs, $searchArgs, $fields);
   }
 
   /**
    * Get Article by ID.
    *
-   * @param string $id
+   * @param string $articleId
    *   Article ID.
    * @param array $fields
    *   The Article fields.
@@ -65,15 +70,23 @@ class ArticlesManager {
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
+   *
+   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
    */
-  public function getArticleById(string $id, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?ContentType $contentType = null, ?string $versionId = null): ?Article {
-	  return $this->articleLoader->loadById(...func_get_args());
+  public function getArticleById(
+      string $articleId,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?ContentType $contentType = null,
+      ?string $versionId = null
+  ): ?Article {
+    return $this->articleLoader->loadById(...func_get_args());
   }
 
   /**
    * Get Article by Slug.
    *
-   * @param string $slug
+   * @param string $articleSlug
    *   Article slug.
    * @param array $fields
    *   The Article fields.
@@ -84,9 +97,15 @@ class ArticlesManager {
    *
    * @return \PccPhpSdk\core\Entity\Article|null
    *   Article Entity.
+   *
+   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
    */
-  public function getArticleBySlug(string $slug, array $fields=[], PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION, ?string $versionId = null): ?Article {
+  public function getArticleBySlug(
+      string $articleSlug,
+      array $fields = [],
+      PublishingLevel $publishingLevel = PublishingLevel::PRODUCTION,
+      ?string $versionId = null
+  ): ?Article {
     return $this->articleLoader->loadBySlug(...func_get_args());
   }
-
 }

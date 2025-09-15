@@ -8,8 +8,8 @@ namespace PccPhpSdk\core\Entity;
  * Entity object containing Article data.
  */
 #[\AllowDynamicProperties]
-class Article {
-
+class Article
+{
   /**
    * Article ID.
    *

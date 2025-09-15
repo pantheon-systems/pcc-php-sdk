@@ -7,8 +7,8 @@ use PccPhpSdk\core\Query\Builder\QueryBuilderInterface;
 /**
  * Abstract class for Article Entity Query Builder.
  */
-abstract class ArticleBaseQueryBuilder implements QueryBuilderInterface {
-
+abstract class ArticleBaseQueryBuilder implements QueryBuilderInterface
+{
   /**
    * Fields to include.
    *
@@ -19,7 +19,8 @@ abstract class ArticleBaseQueryBuilder implements QueryBuilderInterface {
   /**
    * {@inheritDoc}
    */
-  public function addField(string $fieldName): QueryBuilderInterface {
+  public function addField(string $fieldName): QueryBuilderInterface
+  {
     $this->fields[] = $fieldName;
     return $this;
   }
@@ -27,9 +28,9 @@ abstract class ArticleBaseQueryBuilder implements QueryBuilderInterface {
   /**
    * {@inheritDoc}
    */
-  public function addFields(array $fieldNames): QueryBuilderInterface {
+  public function addFields(array $fieldNames): QueryBuilderInterface
+  {
     $this->fields = array_merge($this->fields, $fieldNames);
     return $this;
   }
-
 }

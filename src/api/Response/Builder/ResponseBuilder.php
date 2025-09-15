@@ -12,8 +12,8 @@ use PccPhpSdk\core\Entity\ArticlesList;
  * Provides static methods to convert internal Entities to Response objects.
  */
 #[\AllowDynamicProperties]
-class ResponseBuilder {
-
+class ResponseBuilder
+{
   /**
    * Cast to Article Response.
    *
@@ -23,8 +23,9 @@ class ResponseBuilder {
    * @return \PccPhpSdk\api\Response\Article
    *   Article Response object.
    */
-  public static function toArticleResponse(ArticleEntity $entity): Article {
-    $response = NULL;
+  public static function toArticleResponse(ArticleEntity $entity): Article
+  {
+    $response = null;
     if (!empty($entity)) {
       $entity_properties = get_object_vars($entity);
       $response = new Article();
@@ -45,7 +46,8 @@ class ResponseBuilder {
    * @return \PccPhpSdk\api\Response\PaginatedArticles
    *   PaginatedArticles Response Object.
    */
-  public static function toPaginatedArticles(ArticlesList $articlesList): PaginatedArticles {
+  public static function toPaginatedArticles(ArticlesList $articlesList): PaginatedArticles
+  {
     $response = new PaginatedArticles();
     $response->articles = [];
     if ($articlesList->articles) {
@@ -57,5 +59,4 @@ class ResponseBuilder {
     $response->cursor = $articlesList->cursor;
     return $response;
   }
-
 }

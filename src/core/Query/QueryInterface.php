@@ -7,8 +7,8 @@ use PccPhpSdk\Enum\EntityType;
 /**
  * Query Interface to build JSON encoded query string for the payload of API request.
  */
-interface QueryInterface {
-
+interface QueryInterface
+{
   public function setVariables(array $variables);
 
   /**
@@ -18,5 +18,4 @@ interface QueryInterface {
    *   JSON encoded query string.
    */
   public function toRequestBody(): string;
-
 }

@@ -7,8 +7,8 @@ namespace PccPhpSdk\api\Response;
  *
  * Response Object containing articles and result summary.
  */
-class PaginatedArticles {
-
+class PaginatedArticles
+{
   /**
    * Array of articles.
    *
@@ -57,5 +57,4 @@ class PaginatedArticles {
    * @var int
    */
   public int $limit;
-
 }

@@ -10,8 +10,8 @@ use PccPhpSdk\core\Query\QueryInterface;
  * To build Query
  * @see QueryInterface
  */
-interface QueryBuilderInterface {
-
+interface QueryBuilderInterface
+{
   /**
    * Add field.
    *
@@ -21,7 +21,7 @@ interface QueryBuilderInterface {
    * @return QueryBuilderInterface
    *   Returns the QueryBuilderInterface for chaining.
    */
-  public function addField(string $fieldName) : QueryBuilderInterface;
+  public function addField(string $fieldName): QueryBuilderInterface;
 
   /**
    * Add fields.
@@ -32,7 +32,7 @@ interface QueryBuilderInterface {
    * @return QueryBuilderInterface
    *   Returns the QueryBuilderInterface for chaining.
    */
-  public function addFields(array $fieldNames) : QueryBuilderInterface;
+  public function addFields(array $fieldNames): QueryBuilderInterface;
 
   /**
    * Build Query.
@@ -41,5 +41,4 @@ interface QueryBuilderInterface {
    *   Returns Instance of QueryInterface.
    */
   public function build(): QueryInterface;
-
 }
