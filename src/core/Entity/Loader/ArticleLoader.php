@@ -284,7 +284,8 @@ class ArticleLoader implements ArticleLoaderInterface
       $element = '<' . $tag;
 
     foreach ($attrs as $key => $value) {
-        $element .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+        $attrValue = is_array($value) ? json_encode($value) : (string) $value;
+        $element .= ' ' . $key . '="' . htmlspecialchars($attrValue) . '"';
     }
 
       $style_string = '';
