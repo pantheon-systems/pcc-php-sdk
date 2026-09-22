@@ -238,6 +238,20 @@ class ArticleLoader implements ArticleLoaderInterface
       $style = $node['style'] ?? [];
       $attrs = $node['attrs'] ?? [];
 
+    // Smart component placeholder nodes carry their id/type as top-level
+    // node properties (not inside attrs). Fold them into the rendered
+    // element's attributes so downstream consumers can match a placeholder
+    // back to its component metadata (e.g. by id) instead of relying on
+    // positional ordering, which can drift if upstream parsing diverges.
+    if ($tag === 'component') {
+      if (isset($node['id'])) {
+          $attrs['id'] = $node['id'];
+      }
+      if (isset($node['type'])) {
+          $attrs['type'] = $node['type'];
+      }
+    }
+
     if (empty($children) && empty($data) && empty($attrs)) {
         return;
     }
