@@ -4,7 +4,7 @@ namespace PccPhpSdk\core\Status;
 
 use PccPhpSdk\core\PccClientConfig;
 
-const VERSION = '1.1.1';
+const VERSION = '1.1.2';
 
 class Status
 {
